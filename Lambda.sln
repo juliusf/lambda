@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaCLI", "LambdaCLI\LambdaCLI.csproj", "{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaGUI", "LambdaGUI\LambdaGUI.csproj", "{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemeCore", "SchemeCore\SchemeCore.csproj", "{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaGUI", "LambdaGUI\LambdaGUI.csproj", "{038A5833-C82E-415C-A9E0-F13AF126102B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,18 +13,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{038A5833-C82E-415C-A9E0-F13AF126102B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{038A5833-C82E-415C-A9E0-F13AF126102B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{038A5833-C82E-415C-A9E0-F13AF126102B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{038A5833-C82E-415C-A9E0-F13AF126102B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = LambdaGUI\LambdaGUI.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
