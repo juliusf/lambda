@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>87e54466-c384-4ab8-a9cd-352df35cb9ab</ProjectGuid>
+    <ProjectGuid>{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LambdaGUI</RootNamespace>

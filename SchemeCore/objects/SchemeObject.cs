@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SchemeCore
+namespace SchemeCore.objects
 {
-    public class Class1
+    abstract class SchemeObject
     {
     }
 }
