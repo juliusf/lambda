@@ -29,4 +29,15 @@ namespace SchemeCore.helper
         { 
         }
     }
+    public class SchemeUndefinedSymbolException :SchemeException
+    {
+        public SchemeUndefinedSymbolException()
+        {
+        }
+
+        public SchemeUndefinedSymbolException( string message )
+            : base( message )
+        {
+        }
+    }
 }

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SchemeEnvironment.cs" />
     <Compile Include="helper\SchemeExceptions.cs" />
     <Compile Include="objects\SchemeAtom.cs" />
     <Compile Include="objects\SchemeList.cs" />
@@ -54,10 +55,11 @@
     <Compile Include="objects\SchemeVoid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="objects\SchemeInteger.cs" />
+    <Compile Include="tests\BaseFunctionTests.cs" />
     <Compile Include="tests\SchemeObjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <None Include="class hierarchy.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

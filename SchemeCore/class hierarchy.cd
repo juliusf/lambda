@@ -7,7 +7,7 @@
       <FileName>helper\SchemeExceptions.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SchemeCore.helper.SchemeInvalidArgumentException" Collapsed="true">
+  <Class Name="SchemeCore.helper.SchemeUndefinedSymbolException" Collapsed="true">
     <Position X="1.5" Y="5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -38,7 +38,7 @@
   <Class Name="SchemeCore.objects.SchemeList" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>objects\SchemeList.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,7 +66,7 @@
   <Class Name="SchemeCore.objects.SchemeVoid" Collapsed="true">
     <Position X="5" Y="1.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeVoid.cs</FileName>
     </TypeIdentifier>
   </Class>

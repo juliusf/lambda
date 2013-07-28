@@ -8,7 +8,7 @@ using SchemeCore.helper;
 
 namespace SchemeCore.objects
 {
-    class SchemeList : SchemeObject
+    class SchemeList : SchemeType
     {
         private SchemeObject _car;
         private SchemeObject _cdr;
