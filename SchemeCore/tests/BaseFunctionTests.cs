@@ -39,5 +39,29 @@ namespace SchemeCore.tests
             Assert.True( e2.get( testSymbol ) != root.get( testSymbol ) );
 
         }
+
+        [Test]
+        public void SchemeASTTest()
+        {
+            SchemeAST root = new SchemeAST();
+            SchemeAST ast = new SchemeAST( root,  SchemeNil.instance );
+
+            Assert.True( ast.parent == root );
+
+            SchemeAST child1 = new SchemeAST( ast, SchemeNil.instance );
+            SchemeAST child2 = new SchemeAST( child1, SchemeTrue.instance );
+
+            child1.children.Add( child2 );
+            ast.children.Add( child1 );
+
+            Assert.True( ast.children.Count == 1 );
+            Assert.True( ast.children[0].parent == ast );
+            Assert.True( ast.currentObject == SchemeNil.instance );
+            Assert.True( ast.children[0].children.Count == 1 );
+            Assert.True( ast.children[0].children[0] == child2 );
+            Assert.True( ast.children[0].children[0].parent == child1 );
+            Assert.True( ast.children[0].children[0].currentObject == SchemeTrue.instance ); 
+
+        }
     }
 }

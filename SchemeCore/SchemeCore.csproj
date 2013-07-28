@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="objects\SchemeBool.cs" />
+    <Compile Include="SchemeAST.cs" />
     <Compile Include="SchemeEnvironment.cs" />
     <Compile Include="helper\SchemeExceptions.cs" />
     <Compile Include="objects\SchemeAtom.cs" />
