@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SchemeCore.helper.SchemeException" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper\SchemeExceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.helper.SchemeInvalidArgumentException" Collapsed="true">
+    <Position X="1.5" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper\SchemeExceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.SchemeAtom" Collapsed="true">
+    <Position X="8.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeAtom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.SchemeType" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.SchemeInteger" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeInteger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.objects.SchemeList" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>objects\SchemeList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.objects.SchemeNil" Collapsed="true">
+    <Position X="9.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeNil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.objects.SchemeObject" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.objects.SchemeSymbol" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeSymbol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.objects.SchemeVoid" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeVoid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.tests.SchemeObjectTests" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAARAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tests\SchemeObjectTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

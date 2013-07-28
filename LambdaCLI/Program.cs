@@ -11,8 +11,8 @@ namespace LambdaCLI
     {
         static void Main(string[] args)
         {
-            var foo = new SchemeCore.tests.SchemeSymbolTests();
-            foo.Equals();
+            var foo = new SchemeCore.tests.SchemeObjectTests();
+            foo.schemeListTest();
 
 
         }

@@ -8,10 +8,25 @@ namespace SchemeCore.objects
 {
     class SchemeVoid : SchemeObject
     {
-        private static readonly SchemeVoid instance = new SchemeVoid();
+        private static SchemeVoid _instance = new SchemeVoid();
 
         private SchemeVoid() { }
 
-        public static SchemeVoid Instance { get { return instance; } }
+        public static SchemeVoid instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SchemeVoid();
+                }
+                return _instance;
+            }
+        }
+
+        public override string ToString()
+        {
+            return "<void>";
+        }
     }
 }

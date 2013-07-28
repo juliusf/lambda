@@ -1,3 +1,46 @@
+<<<<<<< HEAD
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaCLI", "LambdaCLI\LambdaCLI.csproj", "{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1} = {D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaGUI", "LambdaGUI\LambdaGUI.csproj", "{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1} = {D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemeCore", "SchemeCore\SchemeCore.csproj", "{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F6F49DE-8C55-4A41-BF6F-BBF6E177E341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDA892CC-A2FA-4DC6-A6FA-BF621A80AE74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal
+=======
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
@@ -33,3 +76,4 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
+>>>>>>> 1970ed4a00088bf64b2f8daf268a44c351d1204e
