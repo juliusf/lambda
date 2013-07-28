@@ -8,3 +8,13 @@ C:\Users\JWF\Documents\Visual Studio 2012\Projects\Lambda\LambdaCLI\bin\Debug\Sc
 C:\Users\JWF\Documents\Visual Studio 2012\Projects\Lambda\LambdaCLI\bin\Debug\nunit.framework.dll
 C:\Users\JWF\Documents\Visual Studio 2012\Projects\Lambda\LambdaCLI\bin\Debug\SchemeCore.pdb
 C:\Users\JWF\Documents\Visual Studio 2012\Projects\Lambda\LambdaCLI\bin\Debug\nunit.framework.xml
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.exe.config
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.exe
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.pdb
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.csprojResolveAssemblyReference.cache
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.exe
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.pdb
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\SchemeCore.dll
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\nunit.framework.dll
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\SchemeCore.pdb
+C:\Users\JWF\Documents\Visual Studio 2012\Projects\lamda-working\LambdaCLI\bin\Debug\nunit.framework.xml
