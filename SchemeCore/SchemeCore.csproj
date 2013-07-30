@@ -57,6 +57,7 @@
     <Compile Include="objects\SchemeVoid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="objects\SchemeInteger.cs" />
+    <Compile Include="SchemeReader.cs" />
     <Compile Include="tests\BaseFunctionTests.cs" />
     <Compile Include="tests\SchemeObjectTests.cs" />
   </ItemGroup>

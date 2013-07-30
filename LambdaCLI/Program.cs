@@ -12,7 +12,7 @@ namespace LambdaCLI
         static void Main(string[] args)
         {
             var foo = new SchemeCore.tests.BaseFunctionTests();
-            foo.SchemeASTTest();
+            foo.SchemeReaderTest();
 
 
         }
