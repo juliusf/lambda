@@ -11,7 +11,7 @@ namespace SchemeCore
 {
 
     
-    class SchemeAST 
+    public class SchemeAST 
     {
         protected SchemeAST _parent;
         protected List<SchemeAST> _children  = new List<SchemeAST>();

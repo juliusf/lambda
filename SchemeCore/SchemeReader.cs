@@ -9,7 +9,7 @@ using SchemeCore.objects;
 
 namespace SchemeCore
 {
-    class SchemeReader
+    public class SchemeReader
     {
   
 

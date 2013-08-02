@@ -90,7 +90,7 @@ namespace SchemeCore
             }
             else
             {
-                throw new SchemeUndefinedSymbolException(String.Format("Undefined Symbol: {0}",  symbol.value)); 
+                return null; 
             }
         }
         public ISchemeEnvironment parent()

@@ -40,4 +40,15 @@ namespace SchemeCore.helper
         {
         }
     }
+    public class SchemeNoSuchMethodException :SchemeException
+    {
+        public SchemeNoSuchMethodException()
+        {
+        }
+
+        public SchemeNoSuchMethodException( string message )
+            : base( message )
+        {
+        }
+    }
 }

@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 using SchemeCore;
+using SchemeCore.objects;
 namespace LambdaCLI
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var foo = new SchemeCore.tests.BaseFunctionTests();
-            foo.SchemeReaderTest();
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
 
+            SchemeAST ast = reader.parseString( "(+ 1 (+ 1 1) (+ 4 (+ 12 3))" );
+            eval.evaluate( ast ).ToString();
 
         }
     }
