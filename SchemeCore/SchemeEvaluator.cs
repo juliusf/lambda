@@ -75,12 +75,12 @@ namespace SchemeCore
 		{
 
             var methodObjects = lookupSymbolsFromEnv( ref ast, environment );
-           // if( methodObjects[0].GetType() != typeof( ISchemeFunction ) )
-          //  {
-          //      throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
-         //   }
+            if(  !( methodObjects[0] is ISchemeFunction ) )
+            {
+                throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
+            }
 
-            return ( (ISchemeFunction) methodObjects[0] ).evaluate( methodObjects.GetRange(1,methodObjects.Count -1) );
+            return ( (ISchemeFunction) methodObjects[0] ).evaluate( methodObjects.GetRange(1,methodObjects.Count -1), new SchemeEnvironment(environment) );
 		}
 
         private List<SchemeObject> lookupSymbolsFromEnv( ref SchemeAST currentAST, ISchemeEnvironment environment )
@@ -109,6 +109,10 @@ namespace SchemeCore
                         }
                     }
                 }
+				else
+				{
+					ret.Add(currentAST.children[i].currentObject);
+				}
             }
             return ret; 
         }

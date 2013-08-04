@@ -10,7 +10,7 @@ using SchemeCore.helper;
 
 namespace SchemeCore
 {
-    interface ISchemeEnvironment
+    internal interface ISchemeEnvironment
     {
         void set( SchemeSymbol symbol, SchemeType type );
         SchemeType get( SchemeSymbol symbol );
@@ -18,7 +18,7 @@ namespace SchemeCore
          ISchemeEnvironment parent();
     }
 
-    class SchemeEnvironment :ISchemeEnvironment
+    internal class SchemeEnvironment :ISchemeEnvironment
     {
         private ISchemeEnvironment _parent;
         private Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
