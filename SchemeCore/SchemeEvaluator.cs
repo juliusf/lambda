@@ -1,8 +1,9 @@
 using System;
-
+using System.Collections.Generic;
 using SchemeCore.objects;
 using SchemeCore;
 using SchemeCore.helper;
+using SchemeCore.builtin;
 
 
 namespace SchemeCore
@@ -13,6 +14,9 @@ namespace SchemeCore
 		public SchemeEvaluator ()
 		{
             root = SchemeEnvironmentRoot.instance;
+
+            //instanciate the builtin Functions:
+            root.set( new SchemeSymbol( "+" ), new SchemeBuiltInPlus() ); 
 		}
 
 		public SchemeObject evaluate(SchemeAST AST)
@@ -69,46 +73,27 @@ namespace SchemeCore
 
         private SchemeObject evaluateSchemeAST( SchemeAST ast, ISchemeEnvironment environment )
 		{
-			/*SchemeObject retValue = SchemeNil.instance;
-			
-            if (ast.currentObject.Equals(new SchemeSymbol ("+"))) { //TODO: overload SchemeSymbol ==
-				int sum = 0;
-				foreach (SchemeAST parameter in ast.children) {
-					String sumString =  (((SchemeSymbol)parameter.currentObject).value);
-                    int icast;
-                    int.TryParse(sumString, out icast);
-                    sum += icast;
 
-				}
-				retValue = new SchemeSymbol (sum.ToString());
-			}
-			return retValue; */
+            var methodObjects = lookupSymbolsFromEnv( ref ast, environment );
+           // if( methodObjects[0].GetType() != typeof( ISchemeFunction ) )
+          //  {
+          //      throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
+         //   }
 
-
-            if( ast.currentObject.GetType() == typeof( SchemeSymbol ) )
-            {
-                ast.currentObject = environment.get( (SchemeSymbol) ast.currentObject );
-            }
-
-            if( ast.currentObject.GetType() != typeof( ISchemeFunction ) )
-            {
-                throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
-            }
-
-            return null;
+            return ( (ISchemeFunction) methodObjects[0] ).evaluate( methodObjects.GetRange(1,methodObjects.Count -1) );
 		}
 
-        private SchemeObject[] lookupSymbolsFromEnv( ref SchemeAST currentAST, ISchemeEnvironment environment )
+        private List<SchemeObject> lookupSymbolsFromEnv( ref SchemeAST currentAST, ISchemeEnvironment environment )
         {
-            SchemeObject[] ret = new SchemeObject[currentAST.children.Count + 1];
-            ret[0] = currentAST.currentObject;
+            List<SchemeObject> ret = new List<SchemeObject>();
+            ret.Add( environment.get( (SchemeSymbol)currentAST.currentObject ) );
 
             for(int i=0; i<currentAST.children.Count;i++)
             {
                 if( currentAST.children[i].currentObject.GetType() == typeof( SchemeSymbol ) )
                 {
                   var symbol = (SchemeSymbol)currentAST.children[i].currentObject;
-                  ret[i + 1] = environment.get( symbol  );
+                  ret.Add(environment.get( symbol  ));
 
                     if( ret[i + 1] == null )  //objcet is not in symbol list, check for integer and float!
                     {
@@ -124,13 +109,8 @@ namespace SchemeCore
                         }
                     }
                 }
-
-
-
             }
-
-
-            return null; 
+            return ret; 
         }
 
 	}

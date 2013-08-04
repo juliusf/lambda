@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="builtin\SchemeBuiltInPlus.cs" />
     <Compile Include="objects\SchemeBool.cs" />
     <Compile Include="objects\SchemeFunction.cs" />
     <Compile Include="SchemeAST.cs" />

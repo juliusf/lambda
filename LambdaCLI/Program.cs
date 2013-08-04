@@ -16,7 +16,8 @@ namespace LambdaCLI
             SchemeEvaluator eval = new SchemeEvaluator();
 
             SchemeAST ast = reader.parseString( "(+ 1 (+ 1 1) (+ 4 (+ 12 3))" );
-            eval.evaluate( ast ).ToString();
+            Console.WriteLine(eval.evaluate( ast ).ToString());
+            
 
         }
     }
