@@ -17,7 +17,7 @@ namespace LambdaCLI
 
             SchemeAST ast = reader.parseString( "(+ 1 (+ 1 1) (+ 4 (+ 12 3))" );
             Console.WriteLine(eval.evaluate( ast ).ToString());
-			ast = reader.parseString("(+ 1 3 23 123 239 (+ 23 2) (+ 23 23 23) 23");
+			ast = reader.parseString("(+ 1 3 23 123 239 (+ 23 2) (+ 23 23 23) 23)");
 			Console.WriteLine(eval.evaluate( ast ).ToString());
         }
     }

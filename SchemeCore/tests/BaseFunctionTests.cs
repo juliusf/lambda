@@ -84,5 +84,15 @@ namespace SchemeCore.tests
             string expression = "(+ 4 (- 2 1) (- (+ (- 2 2) 2) 9))";
             Assert.AreEqual( expression, reader.parseString( expression ).ToString() );
         }
+
+        [Test]
+        public void SchemeEvaluatorTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            SchemeAST ast = reader.parseString( "(+ 1 (+ 1 1) (+ 4 (+ 12 3))" );
+            Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 22 ) );
+        }
     }
 }

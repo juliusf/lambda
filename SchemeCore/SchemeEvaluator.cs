@@ -8,25 +8,25 @@ using SchemeCore.builtin;
 
 namespace SchemeCore
 {
-	public class SchemeEvaluator
-	{
+    public class SchemeEvaluator
+    {
         private SchemeEnvironmentRoot root;
-		public SchemeEvaluator ()
-		{
+        public SchemeEvaluator()
+        {
             root = SchemeEnvironmentRoot.instance;
 
             //instanciate the builtin Functions:
-            root.set( new SchemeSymbol( "+" ), new SchemeBuiltInPlus() ); 
-		}
+            root.set( new SchemeSymbol( "+" ), new SchemeBuiltInPlus() );
+        }
 
-		public SchemeObject evaluate(SchemeAST AST)
-		{
+        public SchemeObject evaluate( SchemeAST AST )
+        {
 
-		return evaluateHelper(ref AST, root);
-		}
+            return evaluateHelper( ref AST, root );
+        }
 
-		private SchemeObject evaluateHelper(ref SchemeAST currentAST, ISchemeEnvironment environment) // TODO: Add SchemeEnvironment
-		{
+        private SchemeObject evaluateHelper( ref SchemeAST currentAST, ISchemeEnvironment environment ) // TODO: Add SchemeEnvironment
+        {
 
             while( true )
             {
@@ -49,16 +49,16 @@ namespace SchemeCore
             return currentAST.children[0].currentObject;
         }
 
-			
+
         private bool updateToNextLevelChild( ref SchemeAST currentAst )
         {
-            foreach( SchemeAST child in currentAst.children ) 
-				{
-					if (child.children.Count != 0) 
-					{
-                        currentAst = child;	
-						return true;
-					}
+            foreach( SchemeAST child in currentAst.children )
+            {
+                if( child.children.Count != 0 )
+                {
+                    currentAst = child;
+                    return true;
+                }
             }
             return false;
         }
@@ -72,51 +72,30 @@ namespace SchemeCore
         }
 
         private SchemeObject evaluateSchemeAST( SchemeAST ast, ISchemeEnvironment environment )
-		{
+        {
 
-            var methodObjects = lookupSymbolsFromEnv( ref ast, environment );
-            if(  !( methodObjects[0] is ISchemeFunction ) )
+            var func = getFunction( ref ast, environment );
+
+
+            return func.evaluate( ref ast, new SchemeEnvironment( environment ) );
+        }
+
+        private ISchemeFunction getFunction( ref SchemeAST ast, ISchemeEnvironment environment )
+        {
+            SchemeObject ret = ast.currentObject;
+            if ( ast.currentObject.GetType() == typeof(SchemeSymbol) )
+            {
+                ret = environment.get( (SchemeSymbol) ret );
+            }
+            
+            if( !( ret is ISchemeFunction ) )
             {
                 throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
             }
 
-            return ( (ISchemeFunction) methodObjects[0] ).evaluate( methodObjects.GetRange(1,methodObjects.Count -1), new SchemeEnvironment(environment) );
-		}
+            return (ISchemeFunction) ret;
 
-        private List<SchemeObject> lookupSymbolsFromEnv( ref SchemeAST currentAST, ISchemeEnvironment environment )
-        {
-            List<SchemeObject> ret = new List<SchemeObject>();
-            ret.Add( environment.get( (SchemeSymbol)currentAST.currentObject ) );
-
-            for(int i=0; i<currentAST.children.Count;i++)
-            {
-                if( currentAST.children[i].currentObject.GetType() == typeof( SchemeSymbol ) )
-                {
-                  var symbol = (SchemeSymbol)currentAST.children[i].currentObject;
-                  ret.Add(environment.get( symbol  ));
-
-                    if( ret[i + 1] == null )  //objcet is not in symbol list, check for integer and float!
-                    {
-                        int intValue;
-
-                        if( int.TryParse( symbol.value, out intValue ) )
-                        {
-                            ret[i + 1] = new SchemeInteger( intValue );
-                        }
-                        else //TODO extend for floats
-                        {
-                            throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", symbol.value ) );
-                        }
-                    }
-                }
-				else
-				{
-					ret.Add(currentAST.children[i].currentObject);
-				}
-            }
-            return ret; 
         }
-
-	}
+    }
 }
 

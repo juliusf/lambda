@@ -9,7 +9,7 @@ namespace SchemeCore.builtin
 {
     class SchemeBuiltInPlus : SchemeBuiltInFunction
     {
-		public override SchemeObject evaluate( List<SchemeObject> parameters, ISchemeEnvironment env )
+		internal  override SchemeObject evaluate( List<SchemeObject> parameters, ISchemeEnvironment env)
         {
             int sum = 0;
             foreach ( SchemeInteger summand in parameters )
