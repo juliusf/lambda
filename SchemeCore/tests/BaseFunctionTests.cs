@@ -93,6 +93,11 @@ namespace SchemeCore.tests
 
             SchemeAST ast = reader.parseString( "(+ 1 (+ 1 1) (+ 4 (+ 12 3))" );
             Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 22 ) );
+
+            ast = reader.parseString( "(define x 13)" );
+            eval.evaluate( ast );
+            ast = reader.parseString( "x" );
+            Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 13 ) );
         }
     }
 }

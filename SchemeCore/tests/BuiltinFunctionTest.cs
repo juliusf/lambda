@@ -16,20 +16,16 @@ namespace SchemeCore.tests
         [Test]
         public void schemeBuiltInPlusTest()
         {
-            List<SchemeObject> list = new List<SchemeObject>();
-            var object1 = new SchemeInteger( 3 );
-            var object2 = new SchemeInteger( 5 );
-            var object3 = new SchemeInteger( 32 );
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
 
-            list.Add(object1);
-            list.Add(object2);
-            list.Add(object3);
-            var function = new  SchemeBuiltInPlus();
-
-            Assert.AreEqual( new SchemeInteger( 40 ), function.evaluate( list, SchemeEnvironmentRoot.instance ) );
+            var ast = reader.parseString( "(+ 32 8)"  );
+            Assert.AreEqual( new SchemeInteger( 40 ), eval.evaluate( ast ) );
 
 
         }
+
+ 
 
     }
 }

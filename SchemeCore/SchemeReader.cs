@@ -71,6 +71,7 @@ namespace SchemeCore
                        break;   
                }
            }
+           appendToken( ref result, ref currentToken );
            return result;
 
         }

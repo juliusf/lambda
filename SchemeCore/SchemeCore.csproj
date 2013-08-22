@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="builtin\SchemeBuiltInPlus.cs" />
+    <Compile Include="builtin\SchemeBuitInDefine.cs" />
     <Compile Include="objects\SchemeBool.cs" />
     <Compile Include="objects\SchemeFunction.cs" />
     <Compile Include="SchemeAST.cs" />
@@ -64,6 +65,9 @@
     <Compile Include="tests\BaseFunctionTests.cs" />
     <Compile Include="tests\BuiltinFunctionTest.cs" />
     <Compile Include="tests\SchemeObjectTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

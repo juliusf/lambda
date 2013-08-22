@@ -51,4 +51,16 @@ namespace SchemeCore.helper
         {
         }
     }
+
+    public class SchemeWrongNumberOfArguments :SchemeException
+    {
+        public SchemeWrongNumberOfArguments()
+        {
+        }
+
+        public SchemeWrongNumberOfArguments( string message )
+            : base( message )
+        {
+        }
+    }
 }

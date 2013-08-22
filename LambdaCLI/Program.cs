@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using SchemeCore;
 using SchemeCore.objects;
+using SchemeCore.tests;
 namespace LambdaCLI
 {
     class Program
@@ -15,10 +16,16 @@ namespace LambdaCLI
             SchemeReader reader = new SchemeReader();
             SchemeEvaluator eval = new SchemeEvaluator();
 
-            SchemeAST ast = reader.parseString( "(+ 1 (+ 1 1) (+ 4 (+ 12 3))" );
-            Console.WriteLine(eval.evaluate( ast ).ToString());
-			ast = reader.parseString("(+ 1 3 23 123 239 (+ 23 2) (+ 23 23 23) 23)");
-			Console.WriteLine(eval.evaluate( ast ).ToString());
+            var foo = new SchemeCore.tests.BaseFunctionTests();
+         //   foo.SchemeEvaluatorTest();
+
+            while( true )
+            {
+                Console.Write( ">" ); 
+                var ast = reader.parseString( Console.ReadLine() );
+                Console.WriteLine(eval.evaluate( ast ).ToString());
+            }
+
         }
     }
 }

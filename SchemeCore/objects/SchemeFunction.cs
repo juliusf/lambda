@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using SchemeCore.objects;
 using SchemeCore.helper;
+using SchemeCore.builtin;
 
 namespace SchemeCore.objects
 {
@@ -16,33 +17,66 @@ namespace SchemeCore.objects
 
     internal abstract class SchemeBuiltInFunction :SchemeType, ISchemeFunction
     {
-        public SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment env )
+
+
+      /*  public SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment env )
         {
-            var methodObjects = lookupSymbolsFromEnv( ref currentAST, env );
-            return evaluate( methodObjects.GetRange( 1, methodObjects.Count - 1 ), env);
-        }
-        internal abstract SchemeObject evaluate( List<SchemeObject> objects, ISchemeEnvironment env );
+            this.currentAST = currentAST;
+            this.environment = env;
+
+            //syntax like define is a special case where we don't want the expresisons to be evaluated!
+            if( handleSyntax() )
+            {
+                return SchemeVoid.instance;
+            }
+            else
+            {
+                var methodObjects = lookupSymbolsFromEnv();
+                return evaluateInternal( methodObjects.GetRange( 1, methodObjects.Count - 1 ) );
+            }
+            
+        }   */
+        public abstract SchemeObject evaluate(ref SchemeAST currentAST, ISchemeEnvironment env );
         public abstract override string ToString();
-       
-         private List<SchemeObject> lookupSymbolsFromEnv( ref SchemeAST currentAST, ISchemeEnvironment environment )
+
+
+
+        internal static List<SchemeObject> lookupSymbolsFromEnv( ref SchemeAST currentAST, ISchemeEnvironment environment )
         {
             List<SchemeObject> ret = new List<SchemeObject>();
             ret.Add( environment.get( (SchemeSymbol) currentAST.currentObject ) );
-
-            for( int i = 0; i < currentAST.children.Count; i++ )
+             // not nice, but it works
+            if( ret[0] == null ) // this holds true if the currentObjcet is NOT in the symbol table. Then it might either be an integer or a float and has not been redefined or the function is unknown
             {
-                if( currentAST.children[i].currentObject.GetType() == typeof( SchemeSymbol ) )
+                ret.RemoveAt( 0 );
+                int intValue;
+                var symbol = ( (SchemeSymbol) currentAST.currentObject ).value;
+                if( int.TryParse( symbol, out intValue ) )
                 {
-                    var symbol = (SchemeSymbol) currentAST.children[i].currentObject;
+                    ret.Add( new SchemeInteger( intValue ) );
+                }
+                else //TODO extend for floats
+                {
+                    throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", symbol ) );
+                }
+            }
+
+            foreach (SchemeAST child in currentAST.children)
+            {
+                if( child.currentObject.GetType() == typeof( SchemeSymbol ) )
+                {
+                    var symbol = (SchemeSymbol) child.currentObject;
                     ret.Add( environment.get( symbol ) );
 
-                    if( ret[i + 1] == null )  //objcet is not in symbol list, check for integer and float!
+                    if( ret[ret.Count -1]== null )  //objcet is not in symbol list, check for integer and float!
                     {
+                        ret.RemoveAt( ret.Count - 1 );
                         int intValue;
 
                         if( int.TryParse( symbol.value, out intValue ) )
-                        {
-                            ret[i + 1] = new SchemeInteger( intValue );
+                        {   
+                            
+                            ret.Add(new SchemeInteger( intValue ));
                         }
                         else //TODO extend for floats
                         {
@@ -52,7 +86,7 @@ namespace SchemeCore.objects
                 }
                 else
                 {
-                    ret.Add( currentAST.children[i].currentObject );
+                    ret.Add( child.currentObject );
                 }
             }
             return ret;
