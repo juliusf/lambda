@@ -46,7 +46,7 @@ namespace SchemeCore.objects
             List<SchemeObject> ret = new List<SchemeObject>();
             ret.Add( environment.get( (SchemeSymbol) currentAST.currentObject ) );
              // not nice, but it works
-            if( ret[0] == null ) // this holds true if the currentObjcet is NOT in the symbol table. Then it might either be an integer or a float and has not been redefined or the function is unknown
+          /*  if( ret[0] == null ) // this holds true if the currentObjcet is NOT in the symbol table. Then it might either be an integer or a float and has not been redefined or the function is unknown
             {
                 ret.RemoveAt( 0 );
                 int intValue;
@@ -59,7 +59,7 @@ namespace SchemeCore.objects
                 {
                     throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", symbol ) );
                 }
-            }
+            }   */
 
             foreach (SchemeAST child in currentAST.children)
             {
@@ -70,18 +70,7 @@ namespace SchemeCore.objects
 
                     if( ret[ret.Count -1]== null )  //objcet is not in symbol list, check for integer and float!
                     {
-                        ret.RemoveAt( ret.Count - 1 );
-                        int intValue;
-
-                        if( int.TryParse( symbol.value, out intValue ) )
-                        {   
-                            
-                            ret.Add(new SchemeInteger( intValue ));
-                        }
-                        else //TODO extend for floats
-                        {
                             throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", symbol.value ) );
-                        }
                     }
                 }
                 else

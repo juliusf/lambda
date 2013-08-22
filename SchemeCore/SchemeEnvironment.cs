@@ -90,7 +90,17 @@ namespace SchemeCore
             }
             else
             {
-                return null; 
+                //check if it is an integer or float
+                int intValue;
+                if( int.TryParse( symbol.value, out intValue ) )
+                {
+
+                   return new SchemeInteger( intValue );
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
         public ISchemeEnvironment parent()

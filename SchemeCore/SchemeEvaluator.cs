@@ -37,25 +37,17 @@ namespace SchemeCore
                 }
 
                 var evaluated = evaluateSchemeAST( currentAST, environment ); //evaluate the expression
-                
+
                 if( currentAST.parent != null )
                 {
                     updateParent( ref currentAST, evaluated );                //replace currentAST with result
                     currentAST = currentAST.parent; //ascend the tree again
                 }
-
-                
-
-                if( currentAST.parent == null )
+                else
                 {
-                    if( currentAST.children.Count == 0 )
-                    {   //always return atleas void!
-                        currentAST.children.Add(new SchemeAST( currentAST, SchemeVoid.instance ));
-                    }
-                    break;
+                    return evaluated;
                 }
             }
-            return currentAST.children[0].currentObject;
         }
 
 

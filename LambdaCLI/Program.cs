@@ -17,13 +17,20 @@ namespace LambdaCLI
             SchemeEvaluator eval = new SchemeEvaluator();
 
             var foo = new SchemeCore.tests.BaseFunctionTests();
-         //   foo.SchemeEvaluatorTest();
+            foo.SchemeReaderTest();
 
             while( true )
             {
                 Console.Write( ">" ); 
                 var ast = reader.parseString( Console.ReadLine() );
-                Console.WriteLine(eval.evaluate( ast ).ToString());
+                try
+                {
+                    Console.WriteLine( eval.evaluate( ast ).ToString() );
+                }
+                catch( SchemeCore.helper.SchemeException e)
+                { 
+                Console.WriteLine(e.Message); 
+                }
             }
 
         }

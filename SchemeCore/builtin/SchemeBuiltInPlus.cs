@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using SchemeCore.helper;
 
 using SchemeCore.objects;
 namespace SchemeCore.builtin
@@ -15,11 +16,17 @@ namespace SchemeCore.builtin
             var list = lookupSymbolsFromEnv( ref currentAST, environment );
             Debug.Assert(list[0].GetType() == typeof(SchemeBuiltInPlus));
             int sum = 0;
-            foreach( SchemeInteger summand in list.GetRange( 1, list.Count - 1 ) ) //all args, but not the current method object
-            { 
-                sum += summand.value;
-            }                              
-
+            try
+            {
+                foreach( SchemeInteger summand in list.GetRange( 1, list.Count - 1 ) ) //all args, but not the current method object
+                {
+                    sum += summand.value;
+                }
+            }
+            catch( InvalidCastException )
+            {
+                throw new SchemeInvalidArgumentException("Builtin Function + expects SchemeInteger or SchemeFloat as parameter. Got something else.");
+            }
             return new SchemeInteger( sum );
         }
         public override string ToString()
