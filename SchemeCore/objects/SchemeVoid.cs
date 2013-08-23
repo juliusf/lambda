@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SchemeCore.objects
 {
-    class SchemeVoid : SchemeObject
+    class SchemeVoid : SchemeType
     {
         private static SchemeVoid _instance = new SchemeVoid();
 
@@ -26,7 +26,7 @@ namespace SchemeCore.objects
 
         public override string ToString()
         {
-            return "<void>";
+            return "";
         }
     }
 }

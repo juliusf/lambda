@@ -27,7 +27,12 @@ namespace LambdaCLI
                 var ast = reader.parseString( Console.ReadLine() );
                 try
                 {
-                    Console.WriteLine( eval.evaluate( ast ).ToString() );
+                    var result = eval.evaluate( ast );
+                    foreach( SchemeObject res in result)
+                    {
+                        Console.WriteLine( res );
+                    }
+                    
                 }
                 catch( SchemeCore.helper.SchemeException e)
                 { 

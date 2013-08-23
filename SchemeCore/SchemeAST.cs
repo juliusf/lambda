@@ -28,14 +28,17 @@ namespace SchemeCore
 
         public SchemeAST( SchemeAST parent, SchemeObject currentObject )
         {
-            Debug.Assert( parent != null && currentObject != null );
+           // Debug.Assert( parent != null && currentObject != null );
             _parent = parent;
             this.currentObject = currentObject;
         }
 
         public override string ToString()
         {
-
+            if( _parent == null )
+            {
+                return toStringRoot();
+            }
 
             string returnString = "(" ;
             returnString += currentObject.ToString();
@@ -53,6 +56,21 @@ namespace SchemeCore
             returnString += ")";
 
             return returnString;
+        }
+
+        private string toStringRoot()
+        {
+            string returnString = currentObject.ToString();
+            bool hasChildren = false;
+
+            foreach( SchemeAST child in children )
+            {
+                hasChildren = true;
+                returnString += " ";
+                returnString += child.ToString();
+            }
+
+            return hasChildren ? returnString.Substring( 1 ) : returnString;
         }
 
     }

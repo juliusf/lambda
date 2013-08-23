@@ -11,9 +11,9 @@ namespace SchemeCore.builtin
 {
     class SchemeBuiltInPlus : SchemeBuiltInFunction
     {
-        public override SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment environment )
+        public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
-            var list = lookupSymbolsFromEnv( ref currentAST, environment );
+            var list = lookupSymbolsFromEnv( ref currentAST, evaluator.currentEnvironment );
             Debug.Assert(list[0].GetType() == typeof(SchemeBuiltInPlus));
             int sum = 0;
             try

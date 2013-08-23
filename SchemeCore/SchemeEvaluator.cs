@@ -22,34 +22,56 @@ namespace SchemeCore
             root.set( new SchemeSymbol( "=" ) , new SchemeBuiltinEquals() ); 
         }
 
-        public SchemeObject evaluate( SchemeAST AST )
+        public List<SchemeObject> evaluate( SchemeAST AST )
         {
-
-            return evaluate( ref AST, root );
+            if( currentEnvironment == null )
+            {
+                currentEnvironment = root;
+            }
+            return evaluate( ref AST);
         }
 
-        internal  SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment environment ) 
+        internal ISchemeEnvironment currentEnvironment  { get; set; } // this is necessary because the ref keyword does not allow polymorphism
+        internal  List<SchemeObject> evaluate( ref SchemeAST currentAST) 
         {
-
-            while( true )
+           
+            var returnValue = new List<SchemeObject>();
+            if( currentAST.currentObject == SchemeVoid.instance )
             {
-                if( updateToNextLevelChild( ref currentAST, environment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
+               for( int i = 0; i < currentAST.children.Count; i++ )
                 {
-                    continue;
-                }
+                    var ast = currentAST.children[i];
+                    while( true )
+                    {
+                        if( updateToNextLevelChild( ref ast, this.currentEnvironment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
+                        {
+                            continue;
+                        }
+                        var evaluated = evaluateSchemeAST( ref ast, this.currentEnvironment ); //evaluate the expression
 
-                var evaluated = evaluateSchemeAST( currentAST, environment ); //evaluate the expression
+                        if( evaluated == null )
+                        {
+                            continue;
+                        }
 
-                if( currentAST.parent != null )
-                {
-                    updateParent( ref currentAST, evaluated );                //replace currentAST with result
-                    currentAST = currentAST.parent; //ascend the tree again
-                }
-                else
-                {
-                    return evaluated;
+                        if( ast.children.Count > 1 )
+                        {
+                            updateParent( ref ast, evaluated );                //replace currentAST with result
+                            
+                        }
+                        if( ast.parent.currentObject != SchemeVoid.instance )
+                        {
+                                ast = ast.parent; //ascend the tree again
+                        }
+                        else
+                        {
+                          returnValue.Add( evaluated );
+                          break;
+                        }
+                    }
                 }
             }
+            return returnValue;
         }
 
 
@@ -90,25 +112,29 @@ namespace SchemeCore
 
         }
 
-        private SchemeObject evaluateSchemeAST( SchemeAST ast, ISchemeEnvironment environment )
+        private SchemeObject evaluateSchemeAST( ref SchemeAST ast, ISchemeEnvironment environment )
         {
+           
+            
             var func = getFunction( ref ast, environment );
             if( func != null )
             {
-                return func.evaluate( ref ast, new SchemeEnvironment( environment ) );
+                this.currentEnvironment = new SchemeEnvironment( environment );
+                return func.evaluate( ref ast, this );
             }
             else  
             {
                 var type = getType(ref ast, environment);
                 if( type != null )
                 {
+                     
                     return type;
                 }
                 else
                 {                      
                     throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
                 }
-            }
+            }   
             
         }
 
@@ -119,8 +145,7 @@ namespace SchemeCore
             {
                 ret = environment.get( (SchemeSymbol) ret );
             }  
-            
-           
+
             if( !(  ret is ISchemeFunction)  )
             {
                 return null; 
@@ -137,7 +162,6 @@ namespace SchemeCore
             {
                 ret = environment.get( (SchemeSymbol) ret );
             }
-
 
             if( !(ret is SchemeType ) )
             {

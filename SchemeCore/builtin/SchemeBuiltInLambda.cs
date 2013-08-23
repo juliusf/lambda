@@ -10,7 +10,7 @@ namespace SchemeCore.builtin
 {
     class SchemeBuiltInLambda : SchemeBuiltInFunction
     {
-        public override SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment env )
+        public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
             return new SchemeLambda( currentAST );
         }

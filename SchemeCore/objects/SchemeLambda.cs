@@ -30,35 +30,44 @@ namespace SchemeCore.objects
             }
             _implementation = ast.children[1];
         }
-        
-        public SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment env )
+
+        public SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
             if( currentAST.children.Count != _params.Count )
             {
                 throw new SchemeWrongNumberOfArguments( String.Format( "Lambda expects exactly two arguments. You have given me: {0}", currentAST.children.Count ) );
             }
 
-            SchemeEnvironment newEnv = new SchemeEnvironment( env );
+            var newEnv = new SchemeEnvironment( evaluator.currentEnvironment );
             for( int i = 0; i < _params.Count; i++ )
             {
                 var child = currentAST.children[i];
                 if (child.currentObject.GetType() == typeof(SchemeSymbol) )
                 {
-                    var val = env.get( (SchemeSymbol) child.currentObject );
+                    var val = evaluator.currentEnvironment.get( (SchemeSymbol) child.currentObject );
 
                     if (val == null)
                     {
                         throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol!: {0}", child.currentObject ) ); 
                     }
                     newEnv.set( _params[i], val );
-                } 
+                }
+               
             }
 
-            var evaluator = new SchemeEvaluator();
-            var old_parent = _implementation.parent;
-            _implementation.parent = null;
-            var result = evaluator.evaluate( ref _implementation, newEnv );
-            return result;
+
+            var old_parent = currentAST.parent;
+            _implementation.parent = currentAST.parent;
+            
+            int postition = currentAST.parent.children.IndexOf( currentAST );
+            currentAST.parent.children.Remove( currentAST );
+            currentAST.parent.children.Add( _implementation );
+            
+               
+            
+            currentAST = _implementation;
+            evaluator.currentEnvironment = newEnv;
+            return null ; //so ugly, but null means: to be evaluated again!
         }
 
         public override string ToString()

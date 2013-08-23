@@ -20,7 +20,7 @@ namespace SchemeCore.tests
             SchemeEvaluator eval = new SchemeEvaluator();
 
             var ast = reader.parseString( "(+ 32 8)"  );
-            Assert.AreEqual( new SchemeInteger( 40 ), eval.evaluate( ast ) );
+            Assert.AreEqual( new SchemeInteger( 40 ), eval.evaluate( ast )[0] );
 
 
         }
@@ -35,12 +35,12 @@ namespace SchemeCore.tests
             eval.evaluate( ast );
             ast = reader.parseString( "(add 1 2)" );
 
-            Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 3 ) );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 3 ) );
 
             ast = reader.parseString( "(define foo (lambda () (+ 1 2))) " );
             eval.evaluate( ast );
             ast = reader.parseString( "(foo)" );
-            Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 3 ) );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 3 ) );
 
 
         }
@@ -52,10 +52,10 @@ namespace SchemeCore.tests
             SchemeEvaluator eval = new SchemeEvaluator();
 
             var ast = reader.parseString( "(= 1 2)" );
-            Assert.AreEqual( eval.evaluate( ast ), SchemeFalse.instance );
+            Assert.AreEqual( eval.evaluate( ast )[0], SchemeFalse.instance );
 
             ast = reader.parseString( "(= 1 1)" );
-            Assert.AreEqual( eval.evaluate( ast ), SchemeTrue.instance );
+            Assert.AreEqual( eval.evaluate( ast )[0], SchemeTrue.instance );
 
 
         }

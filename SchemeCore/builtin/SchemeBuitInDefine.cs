@@ -12,7 +12,7 @@ namespace SchemeCore.builtin
     class SchemeBuitInDefine :SchemeBuiltInFunction
     {
 
-        public override SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment environment)
+        public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
             if( currentAST.children.Count != 2 )
             {
@@ -23,7 +23,7 @@ namespace SchemeCore.builtin
             SchemeObject value;
             if( param.currentObject.GetType() == typeof( SchemeSymbol ) )
             {
-                 value = lookupSymbolsFromEnv( ref param, environment )[0];
+                 value = lookupSymbolsFromEnv( ref param, evaluator.currentEnvironment )[0];
             }
             else
             {
@@ -31,7 +31,7 @@ namespace SchemeCore.builtin
             }
 
 
-            (  environment.parent() ).set( (SchemeSymbol) currentAST.children[0].currentObject, (SchemeType) value );
+            (  evaluator.currentEnvironment.parent() ).set( (SchemeSymbol) currentAST.children[0].currentObject, (SchemeType) value );
 
             return SchemeVoid.instance;
         }

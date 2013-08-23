@@ -32,16 +32,9 @@ namespace SchemeCore
                         i += 2;
                     }
 
-                    if( root.currentObject != SchemeVoid.instance )
-                    {
                         var oldParent = currentParent;
                         currentParent = new SchemeAST( oldParent, makeSchemeObject( tokens[++i] ) ); //make new ast node and assign it to the parent. Also advance the counter!
                         oldParent.children.Add( currentParent );
-                    }
-                    else // This guarantees that the first current Object really is the first function and not void
-                    {
-                        root.currentObject = makeSchemeObject( tokens[++i] );
-                    }
                 }
                 else if( token == ")" )
                 {
@@ -49,14 +42,7 @@ namespace SchemeCore
                 }
                 else
                 {
-                    if( root.currentObject != SchemeVoid.instance )
-                    {
                         currentParent.children.Add( new SchemeAST( currentParent, makeSchemeObject( token ) ) );
-                    }
-                    else  // this is true for expressions which have to evaluated directly
-                    {
-                        root.currentObject = makeSchemeObject( token );
-                    }
                 }
             }
             return root;

@@ -11,9 +11,9 @@ namespace SchemeCore.builtin
 {
     class SchemeBuiltinEquals  : SchemeBuiltInFunction
     {
-        public override SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment env )
+        public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
-            var list = lookupSymbolsFromEnv( ref currentAST, env );
+            var list = lookupSymbolsFromEnv( ref currentAST, evaluator.currentEnvironment );
             Debug.Assert( list[0].GetType() == typeof( SchemeBuiltinEquals ) );
 
             if( list.Count < 3 )

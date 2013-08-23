@@ -12,7 +12,7 @@ namespace SchemeCore.objects
 {
     internal interface ISchemeFunction
     {
-        SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment env );
+        SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator );
     }
 
     internal abstract class SchemeBuiltInFunction :SchemeType, ISchemeFunction
@@ -36,7 +36,7 @@ namespace SchemeCore.objects
             }
             
         }   */
-        public abstract SchemeObject evaluate(ref SchemeAST currentAST, ISchemeEnvironment env );
+        public abstract SchemeObject evaluate(ref SchemeAST currentAST, SchemeEvaluator evaluator );
         public abstract override string ToString();
 
 
