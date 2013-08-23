@@ -37,6 +37,11 @@ namespace SchemeCore.tests
 
             Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 3 ) );
 
+            ast = reader.parseString( "(define foo (lambda () (+ 1 2))) " );
+            eval.evaluate( ast );
+            ast = reader.parseString( "(foo)" );
+            Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 3 ) );
+
 
         }
 

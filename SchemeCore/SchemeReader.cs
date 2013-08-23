@@ -25,6 +25,13 @@ namespace SchemeCore
                 string token = tokens[i];
                 if( token == "(" )
                 {
+                    var j = 1 + i;
+                    if( tokens[j] == ")" )   //peek if void
+                    {
+                        currentParent.children.Add(new SchemeAST( currentParent, SchemeVoid.instance )); 
+                        i += 2;
+                    }
+
                     if( root.currentObject != SchemeVoid.instance )
                     {
                         var oldParent = currentParent;

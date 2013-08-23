@@ -17,15 +17,17 @@ namespace SchemeCore.objects
             { 
                 throw new SchemeWrongNumberOfArguments(String.Format("Lambda expects exactly two arguments. You have given me: {0}",ast.children.Count ));
             }
-            //TODO: Check if params is not empty. --> void functions
 
-            //really not beautiful, but this is the price we pay by using the AST data structure
-            _params.Add( (SchemeSymbol) ast.children[0].currentObject );
-            foreach( SchemeAST child in ast.children[0].children )
+
+            //really not beautiful, but this is the price we pay for using the AST data structure
+            if( ast.children[0].currentObject != SchemeVoid.instance )
             {
-                _params.Add( (SchemeSymbol) child.currentObject );
+                _params.Add( (SchemeSymbol) ast.children[0].currentObject );
+                foreach( SchemeAST child in ast.children[0].children )
+                {
+                    _params.Add( (SchemeSymbol) child.currentObject );
+                }
             }
-
             _implementation = ast.children[1];
         }
         

@@ -16,6 +16,8 @@ namespace LambdaCLI
             SchemeReader reader = new SchemeReader();
             SchemeEvaluator eval = new SchemeEvaluator();
 
+            var bar = new SchemeCore.tests.BaseFunctionTests();
+            bar.SchemeEvaluatorTest();
             var foo = new SchemeCore.tests.SchemeBuiltinFunctionTest();
             foo.schemeBuiltInLambdaTest();
 
