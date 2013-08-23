@@ -45,6 +45,21 @@ namespace SchemeCore.tests
 
         }
 
+        [Test]
+        public void schemeBuiltInEqualsTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString( "(= 1 2)" );
+            Assert.AreEqual( eval.evaluate( ast ), SchemeFalse.instance );
+
+            ast = reader.parseString( "(= 1 1)" );
+            Assert.AreEqual( eval.evaluate( ast ), SchemeTrue.instance );
+
+
+        }
+
  
 
     }

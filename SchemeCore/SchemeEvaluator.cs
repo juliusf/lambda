@@ -19,6 +19,7 @@ namespace SchemeCore
             root.set( new SchemeSymbol( "+" ), new SchemeBuiltInPlus() );
             root.set( new SchemeSymbol( "define" ), new SchemeBuitInDefine() );
             root.set( new SchemeSymbol( "lambda" ), new SchemeBuiltInLambda() );
+            root.set( new SchemeSymbol( "=" ) , new SchemeBuiltinEquals() ); 
         }
 
         public SchemeObject evaluate( SchemeAST AST )
