@@ -18,20 +18,21 @@ namespace SchemeCore
             //instanciate the builtin Functions:
             root.set( new SchemeSymbol( "+" ), new SchemeBuiltInPlus() );
             root.set( new SchemeSymbol( "define" ), new SchemeBuitInDefine() );
+            root.set( new SchemeSymbol( "lambda" ), new SchemeBuiltInLambda() );
         }
 
         public SchemeObject evaluate( SchemeAST AST )
         {
 
-            return evaluateHelper( ref AST, root );
+            return evaluate( ref AST, root );
         }
 
-        private SchemeObject evaluateHelper( ref SchemeAST currentAST, ISchemeEnvironment environment ) // TODO: Add SchemeEnvironment
+        internal  SchemeObject evaluate( ref SchemeAST currentAST, ISchemeEnvironment environment ) 
         {
 
             while( true )
             {
-                if( updateToNextLevelChild( ref currentAST ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
+                if( updateToNextLevelChild( ref currentAST, environment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
                 {
                     continue;
                 }
@@ -51,8 +52,19 @@ namespace SchemeCore
         }
 
 
-        private bool updateToNextLevelChild( ref SchemeAST currentAst )
+        private bool updateToNextLevelChild( ref SchemeAST currentAst , ISchemeEnvironment environment)
         {
+            Type type = currentAst.currentObject.GetType();
+
+            if( type == typeof( SchemeSymbol ) )
+            { 
+                Type obj = environment.get((SchemeSymbol)currentAst.currentObject).GetType();
+                if( obj == typeof( SchemeBuiltInLambda ) ) // or typeof if. this is needed for parts which should not be evaluated.
+                {
+                    return false;
+                } 
+            }
+            
             foreach( SchemeAST child in currentAst.children )
             {
                 if( child.children.Count != 0 )
@@ -92,9 +104,7 @@ namespace SchemeCore
                     return type;
                 }
                 else
-                {   
-                    //it might be an expression which has to be evaluated directly:
-                    
+                {                      
                     throw new SchemeNoSuchMethodException( String.Format( "{0} is no valid Scheme Method!", ast.currentObject.ToString() ) );
                 }
             }

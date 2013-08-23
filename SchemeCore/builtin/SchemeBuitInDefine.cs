@@ -20,11 +20,18 @@ namespace SchemeCore.builtin
             }
 
             var param = currentAST.children[1];
-            var value = lookupSymbolsFromEnv( ref param, environment );
+            SchemeObject value;
+            if( param.currentObject.GetType() == typeof( SchemeSymbol ) )
+            {
+                 value = lookupSymbolsFromEnv( ref param, environment )[0];
+            }
+            else
+            {
+                 value = param.currentObject;
+            }
 
 
-
-            (  environment.parent() ).set( (SchemeSymbol) currentAST.children[0].currentObject, (SchemeType) value[0] );
+            (  environment.parent() ).set( (SchemeSymbol) currentAST.children[0].currentObject, (SchemeType) value );
 
             return SchemeVoid.instance;
         }

@@ -19,7 +19,7 @@ namespace SchemeCore
         public  SchemeObject currentObject { get; set; }
 
         public List<SchemeAST> children { get { return _children; } set { _children = value; } }
-        public SchemeAST parent { get{return _parent;} }
+        public SchemeAST parent { get { return _parent; } set { _parent = value; } }
         public SchemeAST()
         {
             _parent = null;

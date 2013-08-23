@@ -44,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="builtin\SchemeBuiltInLambda.cs" />
     <Compile Include="builtin\SchemeBuiltInPlus.cs" />
     <Compile Include="builtin\SchemeBuitInDefine.cs" />
     <Compile Include="objects\SchemeBool.cs" />
     <Compile Include="objects\SchemeFunction.cs" />
+    <Compile Include="objects\SchemeLambda.cs" />
     <Compile Include="SchemeAST.cs" />
     <Compile Include="SchemeEnvironment.cs" />
     <Compile Include="helper\SchemeExceptions.cs" />
