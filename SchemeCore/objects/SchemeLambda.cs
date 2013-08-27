@@ -64,28 +64,10 @@ namespace SchemeCore.objects
             var foo = currentAST.parent.children.IndexOf(currentAST);
             currentAST.parent.children.Remove(currentAST);
             currentAST.parent.children.Insert(foo, clonedImplementation);
-
-          //  foreach (SchemeAST child in clonedImplementation.children)
-          //  {
-           //     child.parent = clonedImplementation;
-           // }
             clonedImplementation.parent = oldParent;
             currentAST = clonedImplementation;
             
             
-
-            
-            
-            
-
-            if( foo == -1 )
-            {
-                int i = 1;
-            }
-           
-
-
-
             
             evaluator.currentEnvironment = newEnv;
             return null ; //so ugly, but null means: to be evaluated again!

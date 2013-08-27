@@ -154,9 +154,10 @@ namespace SchemeCore
                  {
                      Console.Out.Write("\n");
                      Console.Out.WriteLine(String.Format("TREE CORRUPTION! child: {0} is an orphan!", this.ToString()));
-                     if (System.Diagnostics.Debugger.IsAttached) ;
-                        // System.Diagnostics.Debugger.Break();
-
+                     if( System.Diagnostics.Debugger.IsAttached )
+                     {
+                          System.Diagnostics.Debugger.Break();
+                     }
                  }
              }
              foreach (SchemeAST child in children)
@@ -168,8 +169,8 @@ namespace SchemeCore
                      Console.Out.WriteLine(String.Format("It should be : {0}", this.ToString()));
                      Console.Out.WriteLine(String.Format("Instead it is: {0}", child.parent.ToString() ));
                      Console.Out.Write("\n");
-                     // if (System.Diagnostics.Debugger.IsAttached)
-                    //     System.Diagnostics.Debugger.Break();
+                      if (System.Diagnostics.Debugger.IsAttached)
+                         System.Diagnostics.Debugger.Break();
                  }
              }
          }
