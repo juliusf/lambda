@@ -26,7 +26,7 @@ namespace SchemeCore.objects
 
         public override string ToString()
         {
-            return "<void>";
+            return "";
         }
     }
 }
