@@ -1,23 +1,23 @@
-﻿using System;
+﻿using SchemeCore.objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SchemeCore.objects;
- 
 
 namespace SchemeCore.builtin
 {
-    class SchemeBuiltInLambda : SchemeBuiltInFunction
+    class SchemeBuiltInIf  : SchemeBuiltInFunction
     {
         public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
-            return new SchemeLambda( currentAST );     // The current class is only a wrapper for the lambda keyword. This call creates the new SchemeLambda Object
+            var _if = new SchemeIf( ref currentAST, evaluator );
+            return _if.evaluate( ref currentAST, evaluator );
         }
 
         public override string ToString()
         {
-            return "SchemeBuiltin Lamda";
+            return "Scheme If"; 
         }
     }
 }

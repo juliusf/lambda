@@ -1,17 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SchemeCore.builtin.SchemeBuiltinEquals" Collapsed="true">
+    <Position X="13" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>builtin\SchemeBuiltinEquals.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.builtin.SchemeBuiltInIf" Collapsed="true">
+    <Position X="17.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>builtin\SchemeBuiltInIf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.builtin.SchemeBuiltInLambda" Collapsed="true">
+    <Position X="19.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>builtin\SchemeBuiltInLambda.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.builtin.ScehemBuiltinModulo" Collapsed="true">
+    <Position X="22" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>builtin\schemeBuiltinModulo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="SchemeCore.builtin.SchemeBuiltInPlus" Collapsed="true">
-    <Position X="14.5" Y="4.75" Width="1.5" />
+    <Position X="24.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>builtin\SchemeBuiltInPlus.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.builtin.SchemeBuitInDefine" Collapsed="true">
-    <Position X="16.75" Y="4.75" Width="1.5" />
+    <Position X="26.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>builtin\SchemeBuitInDefine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.builtin.SchemeIf" Collapsed="true">
+    <Position X="15.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAAAAAAAEAAAAAAAAAAoAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>objects\SchemeIf.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.helper.SchemeException" Collapsed="true">
@@ -22,63 +57,64 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.helper.SchemeInvalidArgumentException" Collapsed="true">
-    <Position X="2.75" Y="9" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>helper\SchemeExceptions.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SchemeCore.helper.SchemeUndefinedSymbolException" Collapsed="true">
-    <Position X="5" Y="9" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>helper\SchemeExceptions.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SchemeCore.helper.SchemeNoSuchMethodException" Collapsed="true">
-    <Position X="7.25" Y="9" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>helper\SchemeExceptions.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SchemeCore.helper.SchemeWrongNumberOfArguments" Collapsed="true">
     <Position X="0.5" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>helper\SchemeExceptions.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="SchemeCore.helper.SchemeUndefinedSymbolException" Collapsed="true">
+    <Position X="2.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper\SchemeExceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.helper.SchemeNoSuchMethodException" Collapsed="true">
+    <Position X="5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper\SchemeExceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SchemeCore.helper.SchemeWrongNumberOfArguments" Collapsed="true">
+    <Position X="7.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper\SchemeExceptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="SchemeCore.SchemeAtom" Collapsed="true">
-    <Position X="9" Y="3.25" Width="1.5" />
+    <Position X="7.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeAtom.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.SchemeInteger" Collapsed="true">
-    <Position X="5.5" Y="4.75" Width="1.5" />
+    <Position X="4" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeInteger.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.SchemeType" Collapsed="true">
-    <Position X="12.25" Y="1.75" Width="1.5" />
+    <Position X="18.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeType.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.SchemeAST" Collapsed="true">
-    <Position X="23.25" Y="0.5" Width="1.5" />
+    <Position X="37.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAREAAAAAAAQAAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAREABAAAAAQAAAAAAACAAAAAAAAABA=</HashCode>
       <FileName>SchemeAST.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchemeCore.SchemeEnvironment" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="21.5" Y="1.5" Width="1.5" />
+    <Position X="35.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIIAAAAAABAAAQAQAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SchemeEnvironment.cs</FileName>
@@ -86,7 +122,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SchemeCore.SchemeEnvironmentRoot" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="23.25" Y="1.5" Width="1.5" />
+    <Position X="37.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAIIAAAAAABAAAQAQAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SchemeEnvironment.cs</FileName>
@@ -94,42 +130,42 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="SchemeCore.SchemeEvaluator" Collapsed="true">
-    <Position X="25" Y="1.5" Width="1.5" />
+    <Position X="39.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAAACgAAAgAQIAIAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>gAAAAAAAAAAAAAAAAAAgAAAgAQIAIAAAAAAAAIAEAAA=</HashCode>
       <FileName>SchemeEvaluator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.SchemeReader" Collapsed="true">
-    <Position X="25" Y="2.5" Width="1.5" />
+    <Position X="37.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAgAAAAAAABAAAAAAAAAAAQAAAEAAAA=</HashCode>
       <FileName>SchemeReader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeBool" Collapsed="true">
-    <Position X="9" Y="4.75" Width="1.5" />
+    <Position X="7.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeBool.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeTrue" Collapsed="true">
-    <Position X="10" Y="6.25" Width="1.5" />
+    <Position X="6.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeBool.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeFalse" Collapsed="true">
-    <Position X="7.75" Y="6.25" Width="1.5" />
+    <Position X="8.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeBool.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeBuiltInFunction" Collapsed="true">
-    <Position X="15.75" Y="3.25" Width="1.5" />
+    <Position X="19.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeFunction.cs</FileName>
@@ -137,7 +173,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchemeCore.objects.SchemeLambda" Collapsed="true">
-    <Position X="21.5" Y="2.5" Width="1.5" />
+    <Position X="31" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAIAAAIAAAAAAAIAAAA=</HashCode>
       <FileName>objects\SchemeLambda.cs</FileName>
@@ -145,70 +181,70 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="SchemeCore.objects.SchemeList" Collapsed="true">
-    <Position X="19" Y="3.25" Width="1.5" />
+    <Position X="33.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAEAAAAAAAAAAQAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>objects\SchemeList.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeNil" Collapsed="true">
-    <Position X="12.25" Y="4.75" Width="1.5" />
+    <Position X="10.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeNil.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeObject" Collapsed="true">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="17.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeSymbol" Collapsed="true">
-    <Position X="1" Y="1.75" Width="1.5" />
+    <Position X="1.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEgAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeSymbol.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.objects.SchemeVoid" Collapsed="true">
-    <Position X="3.25" Y="1.75" Width="1.5" />
+    <Position X="28.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeVoid.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.tests.BaseFunctionTests" Collapsed="true">
-    <Position X="21.5" Y="0.5" Width="1.5" />
+    <Position X="35.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgBAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>tests\BaseFunctionTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.tests.SchemeBuiltinFunctionTest" Collapsed="true">
-    <Position X="25" Y="0.5" Width="1.5" />
+    <Position X="39.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAACAAAAAEAAAAAAACAEAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>tests\BuiltinFunctionTest.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SchemeCore.tests.SchemeObjectTests" Collapsed="true">
-    <Position X="23.25" Y="2.5" Width="1.5" />
+    <Position X="35.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAARAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>tests\SchemeObjectTests.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="SchemeCore.ISchemeEnvironment" Collapsed="true">
-    <Position X="21.5" Y="3.75" Width="1.5" />
+    <Position X="35.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAIAAAAAAABAAAQAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SchemeEnvironment.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="SchemeCore.objects.ISchemeFunction" Collapsed="true">
-    <Position X="23.25" Y="3.75" Width="1.5" />
+    <Position X="37.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>objects\SchemeFunction.cs</FileName>

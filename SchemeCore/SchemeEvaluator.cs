@@ -6,6 +6,7 @@ using SchemeCore.helper;
 using SchemeCore.builtin;
 
 
+
 namespace SchemeCore
 {
     public class SchemeEvaluator
@@ -19,7 +20,10 @@ namespace SchemeCore
             root.set( new SchemeSymbol( "+" ), new SchemeBuiltInPlus() );
             root.set( new SchemeSymbol( "define" ), new SchemeBuitInDefine() );
             root.set( new SchemeSymbol( "lambda" ), new SchemeBuiltInLambda() );
-            root.set( new SchemeSymbol( "=" ) , new SchemeBuiltinEquals() ); 
+            root.set( new SchemeSymbol( "=" ) , new SchemeBuiltinEquals() );
+            root.set( new SchemeSymbol( "if" ), new SchemeBuiltInIf() );
+            root.set( new SchemeSymbol( "modulo" ), new ScehemBuiltinModulo() );
+
         }
 
         public List<SchemeObject> evaluate( SchemeAST AST )
@@ -41,8 +45,15 @@ namespace SchemeCore
                for( int i = 0; i < currentAST.children.Count; i++ )
                 {
                     var ast = currentAST.children[i];
-                    while( true )
+                    int instructionCount = 0; 
+                   while( true )
                     {
+                        if (instructionCount == 2)
+                        {
+                            int d = 14;
+                        }
+                       Console.WriteLine(String.Format("Instruction: {0}", instructionCount ++));
+                        ast.createTreeOutput();
                         if( updateToNextLevelChild( ref ast, this.currentEnvironment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
                         {
                             continue;
@@ -51,14 +62,14 @@ namespace SchemeCore
 
                         if( evaluated == null )
                         {
-                            continue;
+                           continue;
                         }
 
-                        if( ast.children.Count > 1 )
-                        {
+                         //if( ast.children.Count > 1 )
+                      //  {
                             updateParent( ref ast, evaluated );                //replace currentAST with result
                             
-                        }
+                        //}
                         if( ast.parent.currentObject != SchemeVoid.instance )
                         {
                                 ast = ast.parent; //ascend the tree again
@@ -85,7 +96,21 @@ namespace SchemeCore
                 if( obj == typeof( SchemeBuiltInLambda ) ) // or typeof if. this is needed for parts which should not be evaluated.
                 {
                     return false;
-                } 
+                }
+                if( obj == typeof( SchemeBuiltInIf ) )
+                {
+                    var tmpRoot = new SchemeAST();
+                    var condition = currentAst.children[0];
+                    var oldParent = condition.parent;
+
+                    tmpRoot.children.Add( condition );
+                    condition.parent = tmpRoot;
+                    var evaluated = evaluate( ref tmpRoot );    //evaluate the if condition
+                    tmpRoot = new SchemeAST(  currentAst, evaluated[0] );
+                    currentAst.children[0] = tmpRoot;
+
+                    return false;
+                }
             }
             
             foreach( SchemeAST child in currentAst.children )
@@ -99,6 +124,7 @@ namespace SchemeCore
             return false;
         }
 
+      
         private void updateParent( ref SchemeAST currentAST, SchemeObject newValue )
         {
             int postition = currentAST.parent.children.IndexOf( currentAST );

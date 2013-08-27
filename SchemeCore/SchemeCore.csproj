@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="builtin\SchemeBuiltinEquals.cs" />
+    <Compile Include="builtin\SchemeBuiltInIf.cs" />
+    <Compile Include="builtin\schemeBuiltinModulo.cs" />
+    <Compile Include="objects\SchemeIf.cs" />
     <Compile Include="builtin\SchemeBuiltInLambda.cs" />
     <Compile Include="builtin\SchemeBuiltInPlus.cs" />
     <Compile Include="builtin\SchemeBuitInDefine.cs" />

@@ -28,7 +28,7 @@ namespace SchemeCore.objects
                     _params.Add( (SchemeSymbol) child.currentObject );
                 }
             }
-            _implementation = ast.children[1];
+            _implementation = (SchemeAST) (ast.children[1]).Clone();
         }
 
         public SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
@@ -42,37 +42,58 @@ namespace SchemeCore.objects
             for( int i = 0; i < _params.Count; i++ )
             {
                 var child = currentAST.children[i];
-                if (child.currentObject.GetType() == typeof(SchemeSymbol) )
+                if( child.currentObject.GetType() == typeof( SchemeSymbol ) )
                 {
                     var val = evaluator.currentEnvironment.get( (SchemeSymbol) child.currentObject );
 
-                    if (val == null)
+                    if( val == null )
                     {
-                        throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol!: {0}", child.currentObject ) ); 
+                        throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol!: {0}", child.currentObject ) );
                     }
                     newEnv.set( _params[i], val );
+                }
+                else
+                {
+                    newEnv.set( _params[i], (SchemeType) child.currentObject );
                 }
                
             }
 
+            var clonedImplementation = (SchemeAST)_implementation.Clone();
+            var oldParent = currentAST.parent;
+            var foo = currentAST.parent.children.IndexOf(currentAST);
+            currentAST.parent.children.Remove(currentAST);
+            currentAST.parent.children.Insert(foo, clonedImplementation);
 
-            var old_parent = currentAST.parent;
-            _implementation.parent = currentAST.parent;
+          //  foreach (SchemeAST child in clonedImplementation.children)
+          //  {
+           //     child.parent = clonedImplementation;
+           // }
+            clonedImplementation.parent = oldParent;
+            currentAST = clonedImplementation;
             
-            int postition = currentAST.parent.children.IndexOf( currentAST );
-            currentAST.parent.children.Remove( currentAST );
-            currentAST.parent.children.Add( _implementation );
             
-               
+
             
-            currentAST = _implementation;
+            
+            
+
+            if( foo == -1 )
+            {
+                int i = 1;
+            }
+           
+
+
+
+            
             evaluator.currentEnvironment = newEnv;
             return null ; //so ugly, but null means: to be evaluated again!
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return "Lambda"; 
         }
     }
 }

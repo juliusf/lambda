@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SchemeCore;
 using SchemeCore.objects;
 using SchemeCore.tests;
+using System.IO;
 namespace LambdaCLI
 {
     class Program
@@ -18,9 +19,19 @@ namespace LambdaCLI
 
             var bar = new SchemeCore.tests.BaseFunctionTests();
             bar.SchemeEvaluatorTest();
+            bar.SchemeASTTest();
             var foo = new SchemeCore.tests.SchemeBuiltinFunctionTest();
             foo.schemeBuiltInLambdaTest();
+            foo.schemeBuiltinIfTest();
+            foo.schemeBuiltinModuloTest();
 
+            var gcd = reader.parseString( "(define gcd (lambda (a b) (if (= b 0) a (gcd b (modulo a b)))))" );
+            eval.evaluate( gcd );
+
+            var recTest = reader.parseString( "(define foo (lambda (a) (if (= a 10) a (foo (+ a 1)))))" );
+
+            eval.evaluate( recTest );
+            
             while( true )
             {
                 Console.Write( ">" ); 
@@ -36,7 +47,7 @@ namespace LambdaCLI
                 }
                 catch( SchemeCore.helper.SchemeException e)
                 { 
-                Console.WriteLine(e.Message); 
+                Console.WriteLine(e.Message);
                 }
             }
 

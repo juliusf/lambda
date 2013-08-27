@@ -60,7 +60,13 @@ namespace SchemeCore.tests
             Assert.True( ast.children[0].children.Count == 1 );
             Assert.True( ast.children[0].children[0] == child2 );
             Assert.True( ast.children[0].children[0].parent == child1 );
-            Assert.True( ast.children[0].children[0].currentObject == SchemeTrue.instance ); 
+            Assert.True( ast.children[0].children[0].currentObject == SchemeTrue.instance );
+
+            SchemeAST clone = (SchemeAST)ast.Clone();
+
+            Assert.AreEqual( clone, ast );
+
+           // Assert.AreEqual( clone, ast );
 
         }
         [Test]
@@ -101,5 +107,6 @@ namespace SchemeCore.tests
 
             ast = reader.parseString( "1 2" ); 
         }
+
     }
 }
