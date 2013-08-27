@@ -204,7 +204,10 @@ namespace SchemeCore
              {
                  Logger.write(currentObject.ToString());
              }
-             treeSanityCheck();
+             if( System.Diagnostics.Debugger.IsAttached )
+             {
+                 treeSanityCheck();
+             }
              if (caller == this)
              {
                  Logger.writeLine("  <---");

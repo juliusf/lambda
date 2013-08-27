@@ -24,15 +24,15 @@ namespace LambdaCLI
             foo.schemeBuiltInLambdaTest();
             foo.schemeBuiltinIfTest();
             foo.schemeBuiltinModuloTest();
+        
+            if( System.Diagnostics.Debugger.IsAttached )
+            {
+                SchemeCore.helper.Logger.enableConsoleLog = true;
+            }
 
-            var gcd = reader.parseString( "(define gcd (lambda (a b) (if (= b 0) a (gcd b (modulo a b)))))" );
-            eval.evaluate( gcd );
-
-            var recTest = reader.parseString( "(define foo (lambda (a) (if (= a 10) a (foo (+ a 1)))))" );
-
-            eval.evaluate( recTest );
-
-            SchemeCore.helper.Logger.enableConsoleLog = true;
+            //load the std
+            
+            eval.loadSchemeLibrary( "std.sch" );
             
             while( true )
             {

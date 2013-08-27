@@ -25,6 +25,18 @@ namespace SchemeCore
             root.set( new SchemeSymbol( "modulo" ), new ScehemBuiltinModulo() );
 
         }
+        
+        public void loadSchemeLibrary( string path )
+        {
+            System.IO.StreamReader file = new System.IO.StreamReader( path );
+            string libraryString = file.ReadToEnd();
+            file.Close();
+
+            var reader = new SchemeReader();
+            var ast = reader.parseString( libraryString );
+
+            evaluate( ast );
+        }
 
         public List<SchemeObject> evaluate( SchemeAST AST )
         {
@@ -50,8 +62,11 @@ namespace SchemeCore
                     {
 
                        Logger.writeLine(String.Format("Instruction: {0}", instructionCount ++));
-                        ast.createTreeOutput();
-                        if( updateToNextLevelChild( ref ast, this.currentEnvironment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
+                       if( Logger.enableConsoleLog || Logger.enableLogfile )
+                       {
+                           ast.createTreeOutput();
+                       }
+                           if( updateToNextLevelChild( ref ast, this.currentEnvironment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
                         {
                             continue;
                         }
@@ -62,11 +77,8 @@ namespace SchemeCore
                            continue;
                         }
 
-                         //if( ast.children.Count > 1 )
-                      //  {
-                            updateParent( ref ast, evaluated );                //replace currentAST with result
-                            
-                        //}
+                        updateParent( ref ast, evaluated );                //replace currentAST with result
+
                         if( ast.parent.currentObject != SchemeVoid.instance )
                         {
                                 ast = ast.parent; //ascend the tree again
@@ -88,8 +100,13 @@ namespace SchemeCore
             Type type = currentAst.currentObject.GetType();
 
             if( type == typeof( SchemeSymbol ) )
-            { 
-                Type obj = environment.get((SchemeSymbol)currentAst.currentObject).GetType();
+            {
+                SchemeType t = environment.get( (SchemeSymbol) currentAst.currentObject );
+                if( t == null )
+                {
+                    throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", currentAst.currentObject.ToString() ) );
+                }
+                Type obj =t.GetType();
                 if( obj == typeof( SchemeBuiltInLambda ) ) // or typeof if. this is needed for parts which should not be evaluated.
                 {
                     return false;
@@ -193,6 +210,8 @@ namespace SchemeCore
 
             return (SchemeType) ret;
         }
+
+       
     }
 }
 
