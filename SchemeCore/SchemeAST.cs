@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using SchemeCore.objects;
+using SchemeCore.helper;
 
 
 namespace SchemeCore
@@ -101,21 +102,6 @@ namespace SchemeCore
                {
                    return false;
                }
-
-             /*  if( this.parent != null && other.parent != null )
-               {
-                   if( !other.parent.Equals( this.parent ) )
-                   {
-                       return false;
-                   }
-               }
-               else
-               {
-                   if( this.parent != other.parent )
-                   {
-                       return false;
-                   }
-               } */
             
                if( this.children.Count != other.children.Count )
                {
@@ -152,8 +138,8 @@ namespace SchemeCore
 
                  if (found == false)
                  {
-                     Console.Out.Write("\n");
-                     Console.Out.WriteLine(String.Format("TREE CORRUPTION! child: {0} is an orphan!", this.ToString()));
+                     Logger.write("\n");
+                     Logger.writeLine(String.Format("TREE CORRUPTION! child: {0} is an orphan!", this.ToString()));
                      if( System.Diagnostics.Debugger.IsAttached )
                      {
                           System.Diagnostics.Debugger.Break();
@@ -164,11 +150,11 @@ namespace SchemeCore
              {
                  if (! child.parent.Equals(this))
                  {
-                     Console.Out.Write("\n");
-                     Console.Out.WriteLine(String.Format("TREE CORRUPTION! child: {0} has the wrong parent", child.ToString() ));
-                     Console.Out.WriteLine(String.Format("It should be : {0}", this.ToString()));
-                     Console.Out.WriteLine(String.Format("Instead it is: {0}", child.parent.ToString() ));
-                     Console.Out.Write("\n");
+                     Logger.write("\n");
+                     Logger.writeLine(String.Format("TREE CORRUPTION! child: {0} has the wrong parent", child.ToString() ));
+                     Logger.writeLine(String.Format("It should be : {0}", this.ToString()));
+                     Logger.writeLine(String.Format("Instead it is: {0}", child.parent.ToString() ));
+                     Logger.write("\n");
                       if (System.Diagnostics.Debugger.IsAttached)
                          System.Diagnostics.Debugger.Break();
                  }
@@ -178,13 +164,13 @@ namespace SchemeCore
          {
              SchemeAST curr = this;
 
-             Console.WriteLine("Current AST:");
+             Logger.writeLine("Current AST:");
 
              curr.createTreeOutputHelper("", true, this);
-             Console.WriteLine("----------------------------");
+             Logger.writeLine("----------------------------");
 
-             Console.WriteLine("Timestamp: " + DateTime.Now);
-             Console.WriteLine("Whole AST tree:");
+             Logger.writeLine("Timestamp: " + DateTime.Now);
+             Logger.writeLine("Whole AST tree:");
              while (curr.currentObject != SchemeVoid.instance)
              {
                  curr = curr.parent;
@@ -192,40 +178,40 @@ namespace SchemeCore
 
               curr.createTreeOutputHelper("", true, this);
 
-              Console.WriteLine("============================");
+              Logger.writeLine("============================");
 
 
          }
 
          private void createTreeOutputHelper(string indent, bool last, SchemeAST caller)
          {
-             Console.Write(indent);
+             Logger.write(indent);
              if (last)
              {
-                 Console.Write("\\-");
+                 Logger.write("\\-");
                  indent += "  ";
              }
              else
              {
-                 Console.Write("|-");
+                 Logger.write("|-");
                  indent += "| ";
              }
              if (currentObject.ToString() == "")
              {
-                 Console.Write("<void>");
+                 Logger.write("<void>");
              }
              else
              {
-                 Console.Write(currentObject.ToString());
+                 Logger.write(currentObject.ToString());
              }
              treeSanityCheck();
              if (caller == this)
              {
-                 Console.WriteLine("  <---");
+                 Logger.writeLine("  <---");
              }
              else
              {
-                 Console.Write("\n");
+                 Logger.write("\n");
              }
              for (int i = 0; i < children.Count; i++)
                  children[i].createTreeOutputHelper(indent, i == children.Count - 1, caller);

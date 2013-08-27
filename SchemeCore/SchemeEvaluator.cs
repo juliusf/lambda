@@ -49,7 +49,7 @@ namespace SchemeCore
                    while( true )
                     {
 
-                       Console.WriteLine(String.Format("Instruction: {0}", instructionCount ++));
+                       Logger.writeLine(String.Format("Instruction: {0}", instructionCount ++));
                         ast.createTreeOutput();
                         if( updateToNextLevelChild( ref ast, this.currentEnvironment ) ) //this updates currentAST until the first AST object is found which contains leaf objects only
                         {

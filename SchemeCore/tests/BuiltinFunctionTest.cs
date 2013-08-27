@@ -50,17 +50,17 @@ namespace SchemeCore.tests
 
             ast = reader.parseString( "(bar (+ 1 2) 2)" );
             Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 5 ) );
-            Console.WriteLine("begin definition: foo");
+            
             ast = reader.parseString("(define bar (lambda (a) (if (= a 10) a (+ (bar (+ a 1)) 1 ))))");
             eval.evaluate(ast);
-            Console.Out.WriteLine("begin call foo");
+            
             ast = reader.parseString("(bar 1)");
             Assert.AreEqual(eval.evaluate(ast)[0], new SchemeInteger(19) );
             ast = reader.parseString( "(define foo (lambda (a) (if (= a 10) a (foo (+ a 1)))))" );
             eval.evaluate( ast );
             
             ast = reader.parseString( "(foo 1)"); 
-        //    Assert.AreEqual( eval.evaluate( ast ), new SchemeInteger( 10 ) );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 10 ) );
 
 
 

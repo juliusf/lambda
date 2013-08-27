@@ -31,6 +31,8 @@ namespace LambdaCLI
             var recTest = reader.parseString( "(define foo (lambda (a) (if (= a 10) a (foo (+ a 1)))))" );
 
             eval.evaluate( recTest );
+
+            SchemeCore.helper.Logger.enableConsoleLog = true;
             
             while( true )
             {
