@@ -38,6 +38,26 @@ namespace SchemeCore.tests
 
             Assert.True( e2.get( testSymbol ) != root.get( testSymbol ) );
 
+            //test correctness in in evaluator
+
+            var reader = new SchemeReader();
+            var evaluator = new SchemeEvaluator();
+
+            var ast = reader.parseString( "(define x 1)" );
+            evaluator.evaluate( ast );
+
+            ast = reader.parseString( "x" );
+            Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 1 ) );
+
+            ast = reader.parseString( "(define bar (lambda () (define x 23) x))" );
+            evaluator.evaluate( ast );
+
+            ast = reader.parseString( "(bar)" );
+            Assert.AreEqual( evaluator.evaluate( ast )[1], new SchemeInteger( 23 ) );
+
+            ast = reader.parseString( "x" );
+            Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 1 ) );
+
         }
 
         [Test]

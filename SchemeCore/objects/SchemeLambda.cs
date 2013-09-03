@@ -13,7 +13,7 @@ namespace SchemeCore.objects
 
         public SchemeLambda( SchemeAST ast )
         {
-            if( ast.children.Count != 2 )
+            if( ast.children.Count < 2 )
             { 
                 throw new SchemeWrongNumberOfArguments(String.Format("Lambda expects exactly two arguments. You have given me: {0}",ast.children.Count ));
             }
@@ -28,8 +28,20 @@ namespace SchemeCore.objects
                     _params.Add( (SchemeSymbol) child.currentObject );
                 }
             }
-            _implementation = (SchemeAST) (ast.children[1]).Clone();
-        }
+            _implementation = new SchemeAST();
+
+            
+
+                for( int i = 1; i < ast.children.Count; i++ )
+                {
+                    _implementation.children.Add( (SchemeAST) ast.children[i].Clone() );
+                    _implementation.children[_implementation.children.Count - 1].parent = ast;
+                }
+
+
+            }
+           
+        
 
         public SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
@@ -60,12 +72,27 @@ namespace SchemeCore.objects
             }
 
             var clonedImplementation = (SchemeAST)_implementation.Clone();
+            
             var oldParent = currentAST.parent;
-            var foo = currentAST.parent.children.IndexOf(currentAST);
+            var index = currentAST.parent.children.IndexOf( currentAST );
             currentAST.parent.children.Remove(currentAST);
-            currentAST.parent.children.Insert(foo, clonedImplementation);
-            clonedImplementation.parent = oldParent;
-            currentAST = clonedImplementation;
+
+
+
+            for( int i = 0; i < clonedImplementation.children.Count; i++ )
+            {
+                currentAST.parent.children.Insert( i + index, clonedImplementation.children[i] );
+                clonedImplementation.children[i].parent = oldParent;
+
+                if( i == clonedImplementation.children.Count - 1 )   // the last one being added
+                {
+                  currentAST.parent.children[i + index].hasOwnEnviornment = true; // set flag for enviornment switch
+                }
+            }
+
+            
+            currentAST = clonedImplementation.children[index];
+            
             
             
             

@@ -56,7 +56,7 @@ namespace SchemeCore
             {
                for( int i = 0; i < currentAST.children.Count; i++ )
                 {
-                    var ast = currentAST.children[i];
+                    var ast = (SchemeAST)currentAST.children[i] ;
                     int instructionCount = 0; 
                    while( true )
                     {
@@ -143,13 +143,16 @@ namespace SchemeCore
         {
             int postition = currentAST.parent.children.IndexOf( currentAST );
             currentAST.parent.children.Remove( currentAST );
-            if(  newValue != SchemeVoid.instance )
-            {
+           // if(  newValue != SchemeVoid.instance )
+          //  {
                 var returnValue = new SchemeAST( currentAST.parent, newValue );
                 currentAST.parent.children.Insert( postition, returnValue );
-            }
-           
+          //  }
 
+            if( currentAST.hasOwnEnviornment )// && currentEnvironment.parent() != null )
+            {
+                currentEnvironment = currentEnvironment.parent();
+             }
         }
 
         private SchemeObject evaluateSchemeAST( ref SchemeAST ast, ISchemeEnvironment environment )
@@ -159,7 +162,6 @@ namespace SchemeCore
             var func = getFunction( ref ast, environment );
             if( func != null )
             {
-                this.currentEnvironment = new SchemeEnvironment( environment );
                 return func.evaluate( ref ast, this );
             }
             else  

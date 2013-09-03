@@ -19,8 +19,10 @@ namespace SchemeCore.builtin
                 throw new SchemeWrongNumberOfArguments( String.Format( "Wrong number of arguments!'define' expects exactly two arguments. You provided: {0}", currentAST.children.Count ) );  
             }
 
-            var param = currentAST.children[1];
-            SchemeObject value;
+           
+                var param = currentAST.children[1];
+
+                SchemeObject value;
             if( param.currentObject.GetType() == typeof( SchemeSymbol ) )
             {
                  value = lookupSymbolsFromEnv( ref param, evaluator.currentEnvironment )[0];
@@ -31,7 +33,7 @@ namespace SchemeCore.builtin
             }
 
 
-            (  evaluator.currentEnvironment.parent() ).set( (SchemeSymbol) currentAST.children[0].currentObject, (SchemeType) value );
+            evaluator.currentEnvironment.set( (SchemeSymbol) currentAST.children[0].currentObject, (SchemeType) value );
 
             return SchemeVoid.instance;
         }

@@ -18,7 +18,7 @@ namespace SchemeCore
         protected List<SchemeAST> _children  = new List<SchemeAST>();
 
         public  SchemeObject currentObject { get; set; }
-
+        public bool hasOwnEnviornment { get; set; }
         public List<SchemeAST> children { get { return _children; } set { _children = value; } }
         public SchemeAST parent { get { return _parent; } set { updateParent(value); } }
         public SchemeAST()
@@ -78,6 +78,7 @@ namespace SchemeCore
         {
            
             SchemeAST ast = new SchemeAST( _parent, currentObject );
+            ast.hasOwnEnviornment = this.hasOwnEnviornment;
 
             foreach( SchemeAST child in children )
             {
