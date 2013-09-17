@@ -73,10 +73,11 @@ namespace SchemeCore
                         }
                         var evaluated = evaluateSchemeAST( ref ast, this.currentEnvironment ); //evaluate the expression
 
-                        if( evaluated == null )
+                        if( evaluated == null)
                         {
                            continue;
                         }
+
 
                         updateParent( ref ast, evaluated );                //replace currentAST with result
 
@@ -142,6 +143,26 @@ namespace SchemeCore
       
         private void updateParent( ref SchemeAST currentAST, SchemeObject newValue )
         {
+         /*   if (currentAST.currentObject.GetType() == typeof(SchemeLambda))
+            {
+                //  foreach (SchemeType obj in currrentEn )   
+                foreach (string key in currentEnvironment.getDict().Keys)
+                {
+                    currentEnvironment.parent().set(new SchemeSymbol(key), currentEnvironment.getDict()[key]);
+                }
+            } */
+            if (currentAST.hasOwnEnviornment)// && currentEnvironment.parent() != null )
+            {
+                if ( newValue is SchemeLambda )
+                {
+                    foreach (string key in currentEnvironment.getDict().Keys)
+                    {
+                        currentEnvironment.parent().set(new SchemeSymbol(key), currentEnvironment.getDict()[key]);
+                    }  
+                }
+                currentEnvironment = currentEnvironment.parent();
+            }
+
             int postition = currentAST.parent.children.IndexOf( currentAST );
             currentAST.parent.children.Remove( currentAST );
            // if(  newValue != SchemeVoid.instance )
@@ -150,10 +171,7 @@ namespace SchemeCore
                 currentAST.parent.children.Insert( postition, returnValue );
           //  }
 
-            if( currentAST.hasOwnEnviornment )// && currentEnvironment.parent() != null )
-            {
-                currentEnvironment = currentEnvironment.parent();
-             }
+               
         }
 
         private SchemeObject evaluateSchemeAST( ref SchemeAST ast, ISchemeEnvironment environment )

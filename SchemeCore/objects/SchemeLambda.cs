@@ -10,17 +10,18 @@ namespace SchemeCore.objects
     {
         private List<SchemeSymbol> _params = new List<SchemeSymbol>();
         private SchemeAST _implementation;
+        private ISchemeEnvironment _lambdaEnv;
 
-        public SchemeLambda( SchemeAST ast )
+        public SchemeLambda( SchemeAST ast, ISchemeEnvironment currentEnv )
         {
             if( ast.children.Count < 2 )
             { 
                 throw new SchemeWrongNumberOfArguments(String.Format("Lambda expects exactly two arguments. You have given me: {0}",ast.children.Count ));
             }
 
-
+            _lambdaEnv = new SchemeEnvironment(currentEnv); ;
             //really not beautiful, but this is the price we pay for using the AST data structure
-            if( ast.children[0].currentObject != SchemeVoid.instance )
+            if( ast.children[0].currentObject != SchemeVoid.instance ) // this is false for lambdas with no arguments
             {
                 _params.Add( (SchemeSymbol) ast.children[0].currentObject );
                 foreach( SchemeAST child in ast.children[0].children )
@@ -50,23 +51,41 @@ namespace SchemeCore.objects
                 throw new SchemeWrongNumberOfArguments( String.Format( "Lambda expects exactly two arguments. You have given me: {0}", currentAST.children.Count ) );
             }
 
-            var newEnv = new SchemeEnvironment( evaluator.currentEnvironment );
+           if (evaluator.currentEnvironment != _lambdaEnv)
+            {
+
+                _lambdaEnv.setParent(evaluator.currentEnvironment);
+                evaluator.currentEnvironment = _lambdaEnv;
+
+            }
+            else
+            {
+                int i = 0;
+            }
+
+
             for( int i = 0; i < _params.Count; i++ )
             {
                 var child = currentAST.children[i];
                 if( child.currentObject.GetType() == typeof( SchemeSymbol ) )
                 {
-                    var val = evaluator.currentEnvironment.get( (SchemeSymbol) child.currentObject );
+                    var val = _lambdaEnv.parent().get( (SchemeSymbol) child.currentObject );
 
                     if( val == null )
                     {
-                        throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol!: {0}", child.currentObject ) );
+                       
+                        val = _lambdaEnv.get((SchemeSymbol)child.currentObject);
+
+                        if (val == null)
+                        {
+                            throw new SchemeUndefinedSymbolException(String.Format("Undefined Symbol!: {0}", child.currentObject));
+                        }
                     }
-                    newEnv.set( _params[i], val );
+                    _lambdaEnv.set(_params[i], val);
                 }
                 else
                 {
-                    newEnv.set( _params[i], (SchemeType) child.currentObject );
+                    _lambdaEnv.set(_params[i], (SchemeType)child.currentObject);
                 }
                
             }
@@ -76,7 +95,6 @@ namespace SchemeCore.objects
             var oldParent = currentAST.parent;
             var index = currentAST.parent.children.IndexOf( currentAST );
             currentAST.parent.children.Remove(currentAST);
-
 
 
             for( int i = 0; i < clonedImplementation.children.Count; i++ )
@@ -93,10 +111,6 @@ namespace SchemeCore.objects
 
             currentAST = currentAST.parent.children[index];
             
-            
-            
-            
-            evaluator.currentEnvironment = newEnv;
             return null ; //so ugly, but null means: to be evaluated again!
         }
 

@@ -31,12 +31,12 @@ namespace SchemeCore.tests
 
             var e1foo = e1.get( testSymbol );
 
-            Assert.True( ( (SchemeInteger) e1foo ).value == 1 );
+            Assert.IsTrue( ( (SchemeInteger) e1foo ).value == 1 );
 
             e2.set( testSymbol, new SchemeInteger( 2 ) );
             root.set( testSymbol, new SchemeInteger( 4 ) );
 
-            Assert.True( e2.get( testSymbol ) != root.get( testSymbol ) );
+            Assert.IsTrue( e2.get( testSymbol ) != root.get( testSymbol ) );
 
             //test correctness in in evaluator
 
@@ -61,12 +61,20 @@ namespace SchemeCore.tests
         }
 
         [Test]
+        public void SchemeEnviornmentTestExtended()        
+        {
+            var reader = new SchemeReader();
+            var ast = reader.parseString( "(lambda () (define x 1))" );
+
+        }
+
+        [Test]
         public void SchemeASTTest()
         {
             SchemeAST root = new SchemeAST();
             SchemeAST ast = new SchemeAST( root,  SchemeNil.instance );
 
-            Assert.True( ast.parent == root );
+            Assert.IsTrue( ast.parent == root );
 
             SchemeAST child1 = new SchemeAST( ast, SchemeNil.instance );
             SchemeAST child2 = new SchemeAST( child1, SchemeTrue.instance );
@@ -74,13 +82,13 @@ namespace SchemeCore.tests
             child1.children.Add( child2 );
             ast.children.Add( child1 );
 
-            Assert.True( ast.children.Count == 1 );
-            Assert.True( ast.children[0].parent == ast );
-            Assert.True( ast.currentObject == SchemeNil.instance );
-            Assert.True( ast.children[0].children.Count == 1 );
-            Assert.True( ast.children[0].children[0] == child2 );
-            Assert.True( ast.children[0].children[0].parent == child1 );
-            Assert.True( ast.children[0].children[0].currentObject == SchemeTrue.instance );
+            Assert.IsTrue( ast.children.Count == 1 );
+            Assert.IsTrue( ast.children[0].parent == ast );
+            Assert.IsTrue( ast.currentObject == SchemeNil.instance );
+            Assert.IsTrue( ast.children[0].children.Count == 1 );
+            Assert.IsTrue( ast.children[0].children[0] == child2 );
+            Assert.IsTrue( ast.children[0].children[0].parent == child1 );
+            Assert.IsTrue( ast.children[0].children[0].currentObject == SchemeTrue.instance );
 
             SchemeAST clone = (SchemeAST)ast.Clone();
 
