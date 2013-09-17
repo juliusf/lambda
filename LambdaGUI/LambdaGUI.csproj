@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,6 +9,8 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>LambdaGUI</RootNamespace>
     <AssemblyName>LambdaGUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,6 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -27,103 +30,61 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LinqBridge">
+      <HintPath>libs\LinqBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="SchemeCore">
+      <HintPath>..\SchemeCore\bin\Debug\SchemeCore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Core" />
-    <Reference Include="Mono.Addins, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Addins.Gui, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Addins.MSBuild, Version=0.6.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.TextEditor">
-      <HintPath>dlls\Mono.TextEditor.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.NRefactory">
       <HintPath>dlls\ICSharpCode.NRefactory.dll</HintPath>
+      <Package>monodevelop</Package>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ICSharpCode.TextEditor">
+      <HintPath>libs\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="MainWindow.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
+    <Compile Include="CodeEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeEditorForm.Designer.cs">
+      <DependentUpon>CodeEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="dlls\" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dlls\Mono.TextEditor.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="dlls\ICSharpCode.NRefactory.dll" />
-    <None Include="dlls\ICSharpCode.NRefactory.CSharp.dll" />
-    <None Include="dlls\ICSharpCode.NRefactory.CSharp.dll.mdb" />
-    <None Include="dlls\ICSharpCode.NRefactory.dll.mdb" />
-    <None Include="dlls\Mono.TextEditor.dll.config" />
-    <None Include="dlls\Mono.TextEditor.dll.mdb" />
-    <None Include="dlls\buildinfo" />
-    <None Include="dlls\ICSharpCode.Decompiler.dll" />
-    <None Include="dlls\ICSharpCode.Decompiler.dll.mdb" />
-    <None Include="dlls\IKVM.Reflection.dll" />
-    <None Include="dlls\IKVM.Reflection.dll.mdb" />
-    <None Include="dlls\mdhost.exe" />
-    <None Include="dlls\mdhost.exe.config" />
-    <None Include="dlls\mdhost.exe.mdb" />
-    <None Include="dlls\mdmonitor.exe" />
-    <None Include="dlls\mdmonitor.exe.mdb" />
-    <None Include="dlls\mdtool.exe" />
-    <None Include="dlls\mdtool.exe.config" />
-    <None Include="dlls\mdtool.exe.mdb" />
-    <None Include="dlls\Mono.Addins.CecilReflector.dll" />
-    <None Include="dlls\Mono.Addins.CecilReflector.dll.mdb" />
-    <None Include="dlls\Mono.Addins.dll" />
-    <None Include="dlls\Mono.Addins.dll.mdb" />
-    <None Include="dlls\Mono.Addins.Gui.dll" />
-    <None Include="dlls\Mono.Addins.Gui.dll.mdb" />
-    <None Include="dlls\Mono.Addins.Setup.dll" />
-    <None Include="dlls\Mono.Addins.Setup.dll.mdb" />
-    <None Include="dlls\Mono.Cecil.dll" />
-    <None Include="dlls\Mono.Cecil.dll.mdb" />
-    <None Include="dlls\Mono.Cecil.Mdb.dll" />
-    <None Include="dlls\Mono.Cecil.Mdb.dll.mdb" />
-    <None Include="dlls\Mono.Cecil.Pdb.dll" />
-    <None Include="dlls\Mono.Cecil.Pdb.dll.mdb" />
-    <None Include="dlls\Mono.Debugging.dll" />
-    <None Include="dlls\Mono.Debugging.dll.mdb" />
-    <None Include="dlls\MonoDevelop.Core.dll" />
-    <None Include="dlls\MonoDevelop.Core.dll.config" />
-    <None Include="dlls\MonoDevelop.Core.dll.mdb" />
-    <None Include="dlls\MonoDevelop.Ide.dll" />
-    <None Include="dlls\MonoDevelop.Ide.dll.config" />
-    <None Include="dlls\MonoDevelop.Ide.dll.mdb" />
-    <None Include="dlls\MonoDevelop.Projects.Formats.MSBuild.exe" />
-    <None Include="dlls\MonoDevelop.Projects.Formats.MSBuild.exe.config" />
-    <None Include="dlls\MonoDevelop.Projects.Formats.MSBuild.exe.mdb" />
-    <None Include="dlls\Newtonsoft.Json.dll" />
-    <None Include="dlls\Newtonsoft.Json.dll.mdb" />
-    <None Include="dlls\Xwt.dll" />
-    <None Include="dlls\Xwt.dll.mdb" />
-    <None Include="dlls\Xwt.Gtk.dll" />
-    <None Include="dlls\Xwt.Gtk.dll.config" />
-    <None Include="dlls\Xwt.Gtk.dll.mdb" />
+    <EmbeddedResource Include="CodeEditorForm.resx">
+      <DependentUpon>CodeEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

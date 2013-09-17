@@ -21,15 +21,17 @@ namespace LambdaCLI
             bar.SchemeEvaluatorTest();
             bar.SchemeASTTest();
             var foo = new SchemeCore.tests.SchemeBuiltinFunctionTest();
-            foo.schemeBuiltInLambdaTest();
-            foo.schemeBuiltinIfTest();
-            foo.schemeBuiltinModuloTest();
+            //foo.schemeBuiltInLambdaTest();
+            //foo.schemeBuiltinIfTest();
+            //foo.schemeBuiltinModuloTest();
         
             if( System.Diagnostics.Debugger.IsAttached )
             {
                 SchemeCore.helper.Logger.enableConsoleLog = true;
+                
             }
 
+            //SchemeCore.helper.Logger.enableLogfile = true;
             //load the std
             
             eval.loadSchemeLibrary( "std.sch" );

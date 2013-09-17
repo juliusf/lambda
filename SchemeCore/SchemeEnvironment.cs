@@ -15,15 +15,20 @@ namespace SchemeCore
         void set( SchemeSymbol symbol, SchemeType type );
         SchemeType get( SchemeSymbol symbol );
         bool has( SchemeSymbol symbol );
+        Dictionary<string, SchemeType> getDict();
          ISchemeEnvironment parent();
+        void setParent(ISchemeEnvironment parent);
     }
 
     internal class SchemeEnvironment :ISchemeEnvironment
     {
         private ISchemeEnvironment _parent;
-        private Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
+        public Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
 
-        
+        public Dictionary<string, SchemeType> getDict()
+        {
+            return _symbolTable;
+        }
         public SchemeEnvironment( ISchemeEnvironment parent )
         {
             Debug.Assert( parent != null, "Parent must not be null! use SchemeEnvironmentroot.Singleton!" );
@@ -56,12 +61,18 @@ namespace SchemeCore
         {
             return _parent;
         }
+
+
+        public void setParent(ISchemeEnvironment parent)
+        {
+            this._parent = parent;
+        }
     }
 
     class SchemeEnvironmentRoot :ISchemeEnvironment
     {
         private static SchemeEnvironmentRoot _instance = new SchemeEnvironmentRoot();
-        private Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
+        public Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
        
         private SchemeEnvironmentRoot() { }
 
@@ -111,6 +122,18 @@ namespace SchemeCore
         public bool has( SchemeSymbol symbol )
         {
             return _symbolTable.ContainsKey( symbol.value );
-        }       
+        }
+
+
+        public Dictionary<string, SchemeType> getDict()
+        {
+            return _symbolTable;
+        }
+
+
+        public void setParent(ISchemeEnvironment parent)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

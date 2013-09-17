@@ -23,7 +23,18 @@ C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working
 C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.pdb
 C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.exe
 C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.pdb
-C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\SchemeCore.dll
 C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\nunit.framework.dll
 C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\SchemeCore.pdb
 C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.csprojResolveAssemblyReference.cache
+C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\nunit.framework.xml
+C:\Users\jules\Documents\Visual Studio 2012\Projects\lamda-working\lamda-working\LambdaCLI\bin\Debug\SchemeCore.dll
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.exe.config
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.exe
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.pdb
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.exe
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\LambdaCLI.pdb
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\SchemeCore.dll
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\nunit.framework.dll
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\SchemeCore.pdb
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\bin\Debug\nunit.framework.xml
+\\VBOXSVR\shared_VM_folder\lamda-working\LambdaCLI\obj\Debug\LambdaCLI.csprojResolveAssemblyReference.cache

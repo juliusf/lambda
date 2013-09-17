@@ -12,7 +12,7 @@ namespace SchemeCore.builtin
     {
         public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
-            return new SchemeLambda( currentAST );     // The current class is only a wrapper for the lambda keyword. This call creates the new SchemeLambda Object
+            return new SchemeLambda( currentAST, evaluator.currentEnvironment );     // The current class is only a wrapper for the lambda keyword. This call creates the new SchemeLambda Object
         }
 
         public override string ToString()

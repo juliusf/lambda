@@ -18,7 +18,7 @@ namespace SchemeCore.builtin
 
             if( list.Count < 3 )
             { 
-                throw new SchemeWrongNumberOfArguments(String.Format("Too few arguments! SchemeEquals need at leas 2 arguments. You specified: {0}", list.Count -1)); 
+                throw new SchemeWrongNumberOfArguments(String.Format("Too few arguments! SchemeEquals need at least 2 arguments. You specified: {0}", list.Count -1)); 
             }
 
             var firstVal = list[1];

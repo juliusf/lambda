@@ -1,11 +1,18 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="SchemeCore/SchemeReader.cs">
+    <Files>
+      <File FileName="SchemeCore/SchemeEvaluator.cs" Line="158" Column="1" />
+      <File FileName="SchemeCore/objects/SchemeLambda.cs" Line="49" Column="1" />
+      <File FileName="SchemeCore/SchemeReader.cs" Line="57" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="LambdaGUI" expanded="True">
-            <Node name="Program.cs" selected="True" />
+          <Node name="LambdaCLI" expanded="True" />
+          <Node name="SchemeCore" expanded="True">
+            <Node name="objects" expanded="True" />
+            <Node name="SchemeReader.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -16,12 +23,17 @@
         <State />
       </Pad>
       <Pad Id="MonoDevelop.NUnit.TestPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="LambdaGUI" selected="True" />
+          <Node name="SchemeCore" expanded="True" />
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="SchemeCore/SchemeEvaluator.cs" line="144" offsetX="746" offsetY="2288" expression="newValue" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>
