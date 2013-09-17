@@ -23,6 +23,7 @@ namespace SchemeCore
             root.set( new SchemeSymbol( "=" ) , new SchemeBuiltinEquals() );
             root.set( new SchemeSymbol( "if" ), new SchemeBuiltInIf() );
             root.set( new SchemeSymbol( "modulo" ), new ScehemBuiltinModulo() );
+            root.set( new SchemeSymbol( "cons" ), new SchemeBuiltinCons() ); 
 
         }
         

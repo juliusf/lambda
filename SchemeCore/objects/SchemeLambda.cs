@@ -90,8 +90,8 @@ namespace SchemeCore.objects
                 }
             }
 
-            
-            currentAST = clonedImplementation.children[index];
+
+            currentAST = currentAST.parent.children[index];
             
             
             
