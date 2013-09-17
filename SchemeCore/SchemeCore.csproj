@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="builtin\SchemeBuiltinCar.cs" />
     <Compile Include="builtin\SchemeBuiltinCdr.cs" />
     <Compile Include="builtin\SchemeBuiltinCons.cs" />
     <Compile Include="builtin\SchemeBuiltinEquals.cs" />

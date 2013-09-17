@@ -105,6 +105,20 @@ namespace SchemeCore.tests
             Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 1 ) );
 
         }
+        [Test]
+        public void schemeBuiltinConsTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString( "(car (cons 10 11))" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 10 ) );
+
+             ast = reader.parseString( "(cdr (cons 10 11))" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 11 ) );
+
+        }
+
  
 
     }
