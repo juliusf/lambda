@@ -32,11 +32,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuFileNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnEvaluate = new System.Windows.Forms.Button();
@@ -48,17 +49,28 @@
             this.resultWindow = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.layout = new System.Windows.Forms.TableLayoutPanel();
+            this.debugTab = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.AstView = new System.Windows.Forms.TreeView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.performanceCounter1 = new System.Diagnostics.PerformanceCounter();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.evaluateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.fileTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.layout.SuspendLayout();
+            this.debugTab.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Window;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.runToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1174, 24);
@@ -69,7 +81,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuFileNew,
-            this.openToolStripMenuItem1,
+            this.menuFileOpen,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.exitToolStripMenuItem,
@@ -82,38 +94,40 @@
             // 
             this.menuFileNew.Name = "menuFileNew";
             this.menuFileNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.menuFileNew.Size = new System.Drawing.Size(141, 22);
+            this.menuFileNew.Size = new System.Drawing.Size(146, 22);
             this.menuFileNew.Text = "&New";
             this.menuFileNew.Click += new System.EventHandler(this.menuFileNew_Click);
             // 
-            // openToolStripMenuItem1
+            // menuFileOpen
             // 
-            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-            this.openToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
-            this.openToolStripMenuItem1.Text = "Open";
+            this.menuFileOpen.Name = "menuFileOpen";
+            this.menuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.menuFileOpen.Size = new System.Drawing.Size(146, 22);
+            this.menuFileOpen.Text = "&Open";
+            this.menuFileOpen.Click += new System.EventHandler(this.menuFileOpen_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem.Text = "Close";
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             // 
             // contextMenuStrip1
@@ -145,7 +159,7 @@
             this.fileTabs.Location = new System.Drawing.Point(3, 38);
             this.fileTabs.Name = "fileTabs";
             this.fileTabs.SelectedIndex = 0;
-            this.fileTabs.Size = new System.Drawing.Size(1168, 341);
+            this.fileTabs.Size = new System.Drawing.Size(874, 341);
             this.fileTabs.TabIndex = 7;
             // 
             // tabPage1
@@ -154,7 +168,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1160, 315);
+            this.tabPage1.Size = new System.Drawing.Size(866, 315);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "NewFile";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -165,16 +179,15 @@
             this.codeWindow.IsReadOnly = false;
             this.codeWindow.Location = new System.Drawing.Point(3, 3);
             this.codeWindow.Name = "codeWindow";
-            this.codeWindow.Size = new System.Drawing.Size(1154, 309);
+            this.codeWindow.Size = new System.Drawing.Size(860, 309);
             this.codeWindow.TabIndex = 0;
-            this.codeWindow.Text = "textEditorControl1";
             // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(3, 521);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1168, 20);
+            this.textBox1.Size = new System.Drawing.Size(874, 20);
             this.textBox1.TabIndex = 5;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -197,7 +210,7 @@
             this.resultWindow.Name = "resultWindow";
             this.resultWindow.ReadOnly = true;
             this.resultWindow.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.resultWindow.Size = new System.Drawing.Size(1168, 104);
+            this.resultWindow.Size = new System.Drawing.Size(874, 104);
             this.resultWindow.TabIndex = 3;
             this.resultWindow.Text = "";
             // 
@@ -213,20 +226,21 @@
             // 
             // layout
             // 
-            this.layout.ColumnCount = 1;
-            this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.layout.ColumnCount = 2;
+            this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.layout.Controls.Add(this.label2, 0, 2);
             this.layout.Controls.Add(this.resultWindow, 0, 3);
             this.layout.Controls.Add(this.label3, 0, 4);
             this.layout.Controls.Add(this.textBox1, 0, 5);
             this.layout.Controls.Add(this.fileTabs, 0, 1);
             this.layout.Controls.Add(this.btnEvaluate, 0, 0);
+            this.layout.Controls.Add(this.debugTab, 1, 1);
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(0, 24);
             this.layout.Name = "layout";
             this.layout.RowCount = 7;
-            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.246572F));
+            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.246571F));
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.75343F));
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
@@ -235,6 +249,62 @@
             this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.layout.Size = new System.Drawing.Size(1174, 559);
             this.layout.TabIndex = 2;
+            // 
+            // debugTab
+            // 
+            this.debugTab.Controls.Add(this.tabPage3);
+            this.debugTab.Controls.Add(this.tabPage4);
+            this.debugTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.debugTab.Location = new System.Drawing.Point(883, 38);
+            this.debugTab.Name = "debugTab";
+            this.debugTab.SelectedIndex = 0;
+            this.debugTab.Size = new System.Drawing.Size(288, 341);
+            this.debugTab.TabIndex = 8;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.AstView);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(280, 315);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "current AST";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // AstView
+            // 
+            this.AstView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AstView.Location = new System.Drawing.Point(3, 3);
+            this.AstView.Name = "AstView";
+            this.AstView.Size = new System.Drawing.Size(274, 309);
+            this.AstView.TabIndex = 0;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(280, 315);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Enviorment";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.evaluateToolStripMenuItem});
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.runToolStripMenuItem.Text = "Run";
+            // 
+            // evaluateToolStripMenuItem
+            // 
+            this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
+            this.evaluateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.evaluateToolStripMenuItem.Text = "&evaluate";
+            this.evaluateToolStripMenuItem.Click += new System.EventHandler(this.evaluateToolStripMenuItem_Click);
             // 
             // CodeEditorForm
             // 
@@ -252,6 +322,9 @@
             this.tabPage1.ResumeLayout(false);
             this.layout.ResumeLayout(false);
             this.layout.PerformLayout();
+            this.debugTab.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,11 +335,12 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuFileNew;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuFileOpen;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnEvaluate;
@@ -278,5 +352,12 @@
         private System.Windows.Forms.RichTextBox resultWindow;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel layout;
+        private System.Windows.Forms.TabControl debugTab;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TreeView AstView;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Diagnostics.PerformanceCounter performanceCounter1;
+        private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem evaluateToolStripMenuItem;
     }
 }

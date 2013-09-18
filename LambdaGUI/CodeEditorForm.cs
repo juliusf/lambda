@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,14 @@ namespace LambdaGUI
     public partial class CodeEditorForm :Form
     {
         ITextEditorProperties _editorSettings;
+        private TextEditorControl ActiveEditor
+        {
+            get
+            {
+                if( fileTabs.TabPages.Count == 0 ) return null;
+                return (TextEditorControl) fileTabs.SelectedTab.Controls[0];
+            }
+        }
         public CodeEditorForm()
         {
             InitializeComponent();
@@ -27,31 +36,7 @@ namespace LambdaGUI
 
         private void btnEvaluate_Click( object sender, EventArgs e )
         {
-            var reader = new SchemeReader();
-            var evaluator = new SchemeEvaluator();
-            var ast = reader.parseString( codeWindow.Text );
-            var res = evaluator.evaluate(ast);
-
-           // resultWindow.
-            foreach( SchemeObject obj in res )
-            {
-                resultWindow.AppendText(obj.ToString() + "\n");
-            }
-
-            var document = codeWindow.Document;
-            var location = new ICSharpCode.TextEditor.TextLocation( 1, 1 );
-
-            Bookmark book = new Bookmark( document, location );
-            document.BookmarkManager.AddMark( book );
-           
-
-            var margin = codeWindow.Margin;
-
-            
-
-            var marker = new TextMarker(1, 1, TextMarkerType.SolidBlock);
-            document.MarkerStrategy.AddMarker( marker );
-            codeWindow.Update();
+            evaluate();
             //document.BookmarkManager.Factory.CreateBookmark( codeWindow.Document, location );
            
         }
@@ -62,6 +47,7 @@ namespace LambdaGUI
             var editor = new TextEditorControl();
             editor.Dock = System.Windows.Forms.DockStyle.Fill;
             editor.IsReadOnly = false;
+            
             editor.Document.DocumentChanged +=
                 new DocumentEventHandler( ( sender, e ) => { SetModifiedFlag( editor, true ); } );
             // When a tab page gets the focus, move the focus to the editor control
@@ -87,6 +73,11 @@ namespace LambdaGUI
                 editor.TextEditorProperties = _editorSettings;
             return editor;
         }
+
+        private void RemoveTextEditor( TextEditorControl editor )
+        {
+            ( (TabControl) editor.Parent.Parent ).Controls.Remove( editor.Parent );
+        }
         private bool IsModified( TextEditorControl editor )
         {
             // TextEditorControl doesn't seem to contain its own 'modified' flag, so 
@@ -102,6 +93,40 @@ namespace LambdaGUI
                     p.Text = p.Text.Substring( 0, p.Text.Length - 1 );
                 else
                     p.Text += "*";
+            }
+        }
+        private void OpenFiles( string[] fns )
+        {
+            // Close default untitled document if it is still empty
+            if( fileTabs.TabPages.Count == 1
+                && ActiveEditor.Document.TextLength == 0
+                && string.IsNullOrEmpty( ActiveEditor.FileName ) )
+                RemoveTextEditor( ActiveEditor );
+
+            // Open file(s)
+            foreach( string fn in fns )
+            {
+                var editor = AddNewTextEditor( Path.GetFileName( fn ) );
+                try
+                {
+                    editor.LoadFile( fn );
+                    // Modified flag is set during loading because the document 
+                    // "changes" (from nothing to something). So, clear it again.
+                    SetModifiedFlag( editor, false );
+                }
+                catch( Exception ex )
+                {
+                    MessageBox.Show( ex.Message, ex.GetType().Name );
+                    RemoveTextEditor( editor );
+                    return;
+                }
+
+                // ICSharpCode.TextEditor doesn't have any built-in code folding
+                // strategies, so I've included a simple one. Apparently, the
+                // foldings are not updated automatically, so in this demo the user
+                // cannot add or remove folding regions after loading the file.
+                editor.Document.FoldingManager.FoldingStrategy = new RegionFoldingStrategy();
+                editor.Document.FoldingManager.UpdateFoldings( null, null );
             }
         }
 
@@ -134,5 +159,96 @@ namespace LambdaGUI
         {
 
         }
+
+        private void menuFileOpen_Click( object sender, EventArgs e )
+        {
+            if( openFileDialog.ShowDialog() == DialogResult.OK )
+                // Try to open chosen file
+                OpenFiles( openFileDialog.FileNames );
+        }
+
+        private void evaluateToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            evaluate();
+        }
+
+        public void evaluate()
+        {
+            var reader = new SchemeReader();
+            var evaluator = new SchemeEvaluator();
+
+            var ast = reader.parseString( ActiveEditor.Text );
+            var res = evaluator.evaluate( ast );
+
+            // resultWindow.
+            foreach( SchemeObject obj in res )
+            {
+                resultWindow.AppendText( obj.ToString() + "\n" );
+            }
+
+            var document = codeWindow.Document;
+            var location = new ICSharpCode.TextEditor.TextLocation( 1, 1 );
+
+            Bookmark book = new Bookmark( document, location );
+            document.BookmarkManager.AddMark( book );
+
+
+            var margin = codeWindow.Margin;
+
+
+
+            var marker = new TextMarker( 1, 1, TextMarkerType.SolidBlock );
+            document.MarkerStrategy.AddMarker( marker );
+            codeWindow.Update();
+        }
     }
+    public class RegionFoldingStrategy :IFoldingStrategy
+    {
+        /// <summary>
+        /// Generates the foldings for our document.
+        /// </summary>
+        /// <param name="document">The current document.</param>
+        /// <param name="fileName">The filename of the document.</param>
+        /// <param name="parseInformation">Extra parse information, not used in this sample.</param>
+        /// <returns>A list of FoldMarkers.</returns>
+       
+        public List<FoldMarker> GenerateFoldMarkers( IDocument document, string fileName, object parseInformation )
+        {
+            List<FoldMarker> list = new List<FoldMarker>();
+
+            Stack<int> startLines = new Stack<int>();
+
+            // Create foldmarkers for the whole document, enumerate through every line.
+            for( int i = 0; i < document.TotalNumberOfLines; i++ )
+            {
+                var seg = document.GetLineSegment( i );
+                int offs, end = document.TextLength;
+                char c;
+                for( offs = seg.Offset; offs < end && ( ( c = document.GetCharAt( offs ) ) == ' ' || c == '\t' ); offs++ )
+                { }
+                if( offs == end )
+                    break;
+                int spaceCount = offs - seg.Offset;
+
+                // now offs points to the first non-whitespace char on the line
+                if( document.GetCharAt( offs ) == '#' )
+                {
+                    string text = document.GetText( offs, seg.Length - spaceCount );
+                    if( text.StartsWith( "#region" ) )
+                        startLines.Push( i );
+                    if( text.StartsWith( "#endregion" ) && startLines.Count > 0 )
+                    {
+                        // Add a new FoldMarker to the list.
+                        int start = startLines.Pop();
+                        list.Add( new FoldMarker( document, start,
+                            document.GetLineSegment( start ).Length,
+                            i, spaceCount + "#endregion".Length ) );
+                    }
+                }
+            }
+
+            return list;
+        }
+    }
+
 }

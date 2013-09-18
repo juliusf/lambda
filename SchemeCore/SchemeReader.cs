@@ -83,6 +83,47 @@ namespace SchemeCore
 
         }
 
+        public List<Token> tokenizeWithPos( string input )
+        {
+            input = input.Replace( "\r", " " );
+            input = input.Replace( "\t", " " );
+
+            var result = new List<Token>();
+            string currentToken = "";
+            int lnCnt = 0;
+            int colcnt = 0;
+            
+            foreach( char c in input )
+            {
+                if( c == '\n' )
+                {
+                    // add to result here, if (currToken != "") ---
+                    lnCnt++;
+                    colcnt = 0;
+                    continue;
+                }
+                colcnt++;
+
+               switch( c )
+               { 
+                   case '(':
+                   case ')':
+                       appendToken( ref result, ref currentToken, lnCnt, colcnt );
+                       //result.Add(c.ToString());
+                       break;
+                   case ' ':
+                       appendToken( ref result, ref currentToken, lnCnt, colcnt );
+                       break;
+                   default:
+                       currentToken += c;
+                       break;   
+               }
+           }
+            appendToken( ref result, ref currentToken, lnCnt, colcnt );
+
+           return result;
+        }
+
         void appendToken( ref List<string> result, ref string token )
         {
             if( token != "" )
@@ -90,6 +131,19 @@ namespace SchemeCore
                 result.Add( token );
                 token = "";
 
+            }
+        }
+
+        void appendToken( ref List<Token> result, ref string token, int numlines, int numcols )
+        {
+            if( token != "" )
+            {
+                var res = new Token();
+                res.token = token;
+                res.line = numlines;
+                res.col = numcols;
+
+                result.Add( res );
             }
         }
 
@@ -107,10 +161,17 @@ namespace SchemeCore
             {
                 return SchemeTrue.instance;
             }
-            else   //TODO if token not in symbol-table, try to cast, create schemeInteger
+            else  
             {
                 return new SchemeSymbol( token );
             }
         }
+    }
+
+    private struct Token
+    {
+        public string token;
+        public int line;
+        public int col;
     }
 }
