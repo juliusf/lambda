@@ -51,7 +51,7 @@ namespace SchemeCore.objects
                 throw new SchemeWrongNumberOfArguments( String.Format( "Lambda expects exactly two arguments. You have given me: {0}", currentAST.children.Count ) );
             }
 
-           if (evaluator.currentEnvironment != _lambdaEnv)
+          if (evaluator.currentEnvironment != _lambdaEnv)
             {
 
                 _lambdaEnv.setParent(evaluator.currentEnvironment);
@@ -61,7 +61,7 @@ namespace SchemeCore.objects
             else
             {
                 int i = 0;
-            }
+            }  
 
 
             for( int i = 0; i < _params.Count; i++ )
@@ -69,23 +69,23 @@ namespace SchemeCore.objects
                 var child = currentAST.children[i];
                 if( child.currentObject.GetType() == typeof( SchemeSymbol ) )
                 {
-                    var val = _lambdaEnv.parent().get( (SchemeSymbol) child.currentObject );
+                    var val = evaluator.currentEnvironment.parent().get( (SchemeSymbol) child.currentObject );
 
                     if( val == null )
                     {
                        
-                        val = _lambdaEnv.get((SchemeSymbol)child.currentObject);
+                        val = evaluator.currentEnvironment.get((SchemeSymbol)child.currentObject);
 
                         if (val == null)
                         {
                             throw new SchemeUndefinedSymbolException(String.Format("Undefined Symbol!: {0}", child.currentObject));
                         }
                     }
-                    _lambdaEnv.set(_params[i], val);
+                    evaluator.currentEnvironment.set( _params[i], val );
                 }
                 else
                 {
-                    _lambdaEnv.set(_params[i], (SchemeType)child.currentObject);
+                    evaluator.currentEnvironment.set( _params[i], (SchemeType) child.currentObject );
                 }
                
             }

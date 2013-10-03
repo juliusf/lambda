@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SchemeCore.helper;
 
 namespace LambdaGUI
 {
@@ -12,6 +13,8 @@ namespace LambdaGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
+            Logger.enableConsoleLog = true;
+            Logger.enableEventLog = true;
             Application.Run( new CodeEditorForm() );
         }
     }

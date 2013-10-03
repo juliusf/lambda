@@ -37,6 +37,8 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.evaluateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -53,16 +55,12 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.AstView = new System.Windows.Forms.TreeView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.performanceCounter1 = new System.Diagnostics.PerformanceCounter();
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.evaluateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.fileTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.layout.SuspendLayout();
             this.debugTab.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -129,6 +127,22 @@
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
             this.exitToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
+            // 
+            // runToolStripMenuItem
+            // 
+            this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.evaluateToolStripMenuItem});
+            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.runToolStripMenuItem.Text = "Run";
+            // 
+            // evaluateToolStripMenuItem
+            // 
+            this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
+            this.evaluateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.evaluateToolStripMenuItem.Text = "&evaluate";
+            this.evaluateToolStripMenuItem.Click += new System.EventHandler(this.evaluateToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -290,22 +304,6 @@
             this.tabPage4.Text = "Enviorment";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // runToolStripMenuItem
-            // 
-            this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.evaluateToolStripMenuItem});
-            this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.runToolStripMenuItem.Text = "Run";
-            // 
-            // evaluateToolStripMenuItem
-            // 
-            this.evaluateToolStripMenuItem.Name = "evaluateToolStripMenuItem";
-            this.evaluateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
-            this.evaluateToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.evaluateToolStripMenuItem.Text = "&evaluate";
-            this.evaluateToolStripMenuItem.Click += new System.EventHandler(this.evaluateToolStripMenuItem_Click);
-            // 
             // CodeEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -316,6 +314,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CodeEditorForm";
             this.Text = " λ -  The ultimate Interpreter ";
+            this.Load += new System.EventHandler(this.CodeEditorForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.fileTabs.ResumeLayout(false);
@@ -324,7 +323,6 @@
             this.layout.PerformLayout();
             this.debugTab.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,7 +354,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TreeView AstView;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Diagnostics.PerformanceCounter performanceCounter1;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem evaluateToolStripMenuItem;
     }

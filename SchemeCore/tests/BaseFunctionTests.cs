@@ -102,6 +102,7 @@ namespace SchemeCore.tests
         {
             var reader = new SchemeReader();
             var arr = reader.tokenize( "   \n\r\n\r\n\r\n \r\r\r\r  \r\r\r\n\n \n\n\n\n (define   \t\t\t  x \n\n\r\r\r   ( + \t 1 \t\t\t\t\t\t\t\t 3 ) \t\t\t     \t\t )" );
+            var arrpos = reader.tokenizeWithPos( "   \n\r\n\r\n\r\n \r\r\r\r  \r\r\r\n\n \n\n\n\n (define   \t\t\t  x \n\n\r\r\r   ( + \t 1 \t\t\t\t\t\t\t\t 3 ) \t\t\t     \t\t )" );
             List<string> arr2 = new List<string>();
             arr2.Add( "(" );
             arr2.Add( "define" );

@@ -98,6 +98,10 @@ namespace SchemeCore
                 if( c == '\n' )
                 {
                     // add to result here, if (currToken != "") ---
+                    if( currentToken != "" )
+                    {
+                        appendToken( ref result, ref currentToken, lnCnt, colcnt );
+                    }
                     lnCnt++;
                     colcnt = 0;
                     continue;
@@ -144,6 +148,7 @@ namespace SchemeCore
                 res.col = numcols;
 
                 result.Add( res );
+                token = "";
             }
         }
 
@@ -168,7 +173,7 @@ namespace SchemeCore
         }
     }
 
-    private struct Token
+    public  struct Token
     {
         public string token;
         public int line;

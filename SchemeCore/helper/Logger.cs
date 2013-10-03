@@ -10,7 +10,14 @@ namespace SchemeCore.helper
     {
         public static bool enableLogfile { get; set; }
         public static bool enableConsoleLog { get; set; }
-        
+        public static bool enableEventLog { get; set; }
+
+        public  delegate void logWriteEventHandler( string text );
+        public  delegate void logWriteLnEventHandler( string text );
+
+        public static event logWriteEventHandler logWrite;
+        public static event logWriteLnEventHandler logWriteLn;
+
         public static void writeLine( string input )
         {
             if( enableLogfile )
@@ -23,6 +30,11 @@ namespace SchemeCore.helper
             if (enableConsoleLog)
             {
                 Console.Out.WriteLine(input);
+            }
+
+            if( enableEventLog )
+            {
+                logWriteLn( input );
             }
             
             }
@@ -39,6 +51,11 @@ namespace SchemeCore.helper
             if (enableConsoleLog)
             {
                 Console.Out.Write(input);
+            }
+
+            if( enableEventLog )
+            {
+                logWrite( input );
             }
             
             }

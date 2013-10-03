@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemeCore", "SchemeCore\SchemeCore.csproj", "{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaGUI", "LambdaGUI\LambdaGUI.csproj", "{038A5833-C82E-415C-A9E0-F13AF126102B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1} = {D11DC7BE-840D-4A11-97B2-E4CD0C23E1D1}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,6 +12,8 @@ using ICSharpCode;
 using ICSharpCode.TextEditor.Document;
 using ICSharpCode.TextEditor;
 
+using SchemeCore.helper;
+
 namespace LambdaGUI
 {
     public partial class CodeEditorForm :Form
@@ -201,6 +203,28 @@ namespace LambdaGUI
             document.MarkerStrategy.AddMarker( marker );
             codeWindow.Update();
         }
+
+        private void CodeEditorForm_Load( object sender, EventArgs e )
+        {
+            Logger.logWrite += new Logger.logWriteEventHandler( onLogWrite );
+            Logger.logWriteLn += new Logger.logWriteLnEventHandler( onLogWriteLn );
+        }
+
+        private void onLogWrite( string text )
+        {
+            resultWindow.AppendText( text );
+            resultWindow.SelectionStart = resultWindow.Text.Length;
+            resultWindow.ScrollToCaret();
+        }
+
+        private void onLogWriteLn( string text )
+        {
+            resultWindow.AppendText( text + '\n');
+            resultWindow.SelectionStart = resultWindow.Text.Length;
+            resultWindow.ScrollToCaret();
+        }
+
+
     }
     public class RegionFoldingStrategy :IFoldingStrategy
     {
