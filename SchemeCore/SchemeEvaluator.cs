@@ -108,7 +108,7 @@ namespace SchemeCore
                 SchemeType t = environment.get( (SchemeSymbol) currentAst.currentObject );
                 if( t == null )
                 {
-                    throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", currentAst.currentObject.ToString() ) );
+                    throw new SchemeUndefinedSymbolException( String.Format( "Undefined Symbol: {0}", currentAst.currentObject.ToString() ), currentAst.fileName, currentAst.sourceLength, currentAst.sourceOffset  );
                 }
                 Type obj =t.GetType();
                 if( obj == typeof( SchemeBuiltInLambda ) ) // or typeof if. this is needed for parts which should not be evaluated.

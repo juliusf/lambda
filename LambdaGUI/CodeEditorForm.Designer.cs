@@ -42,7 +42,6 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnEvaluate = new System.Windows.Forms.Button();
             this.fileTabs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.codeWindow = new ICSharpCode.TextEditor.TextEditorControl();
@@ -53,14 +52,19 @@
             this.layout = new System.Windows.Forms.TableLayoutPanel();
             this.debugTab = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.AstView = new System.Windows.Forms.TreeView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnEvaluate = new System.Windows.Forms.Button();
+            this.btnSingleStep = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.fileTabs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.layout.SuspendLayout();
             this.debugTab.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -156,16 +160,6 @@
             this.tabPage2.Size = new System.Drawing.Size(200, 100);
             this.tabPage2.TabIndex = 0;
             // 
-            // btnEvaluate
-            // 
-            this.btnEvaluate.Location = new System.Drawing.Point(3, 3);
-            this.btnEvaluate.Name = "btnEvaluate";
-            this.btnEvaluate.Size = new System.Drawing.Size(75, 21);
-            this.btnEvaluate.TabIndex = 6;
-            this.btnEvaluate.Text = "evaluate";
-            this.btnEvaluate.UseVisualStyleBackColor = true;
-            this.btnEvaluate.Click += new System.EventHandler(this.btnEvaluate_Click);
-            // 
             // fileTabs
             // 
             this.fileTabs.Controls.Add(this.tabPage1);
@@ -248,8 +242,8 @@
             this.layout.Controls.Add(this.label3, 0, 4);
             this.layout.Controls.Add(this.textBox1, 0, 5);
             this.layout.Controls.Add(this.fileTabs, 0, 1);
-            this.layout.Controls.Add(this.btnEvaluate, 0, 0);
             this.layout.Controls.Add(this.debugTab, 1, 1);
+            this.layout.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(0, 24);
             this.layout.Name = "layout";
@@ -277,6 +271,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.listView1);
             this.tabPage3.Controls.Add(this.AstView);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -285,6 +280,16 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "current AST";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(3, 3);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(274, 309);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // AstView
             // 
@@ -303,6 +308,41 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Enviorment";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.06865F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.93135F));
+            this.tableLayoutPanel1.Controls.Add(this.btnEvaluate, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnSingleStep, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(874, 29);
+            this.tableLayoutPanel1.TabIndex = 9;
+            // 
+            // btnEvaluate
+            // 
+            this.btnEvaluate.Location = new System.Drawing.Point(3, 3);
+            this.btnEvaluate.Name = "btnEvaluate";
+            this.btnEvaluate.Size = new System.Drawing.Size(75, 23);
+            this.btnEvaluate.TabIndex = 0;
+            this.btnEvaluate.Text = "evaluate";
+            this.btnEvaluate.UseVisualStyleBackColor = true;
+            this.btnEvaluate.Click += new System.EventHandler(this.btnEvaluate_Click_1);
+            // 
+            // btnSingleStep
+            // 
+            this.btnSingleStep.Location = new System.Drawing.Point(91, 3);
+            this.btnSingleStep.Name = "btnSingleStep";
+            this.btnSingleStep.Size = new System.Drawing.Size(75, 23);
+            this.btnSingleStep.TabIndex = 1;
+            this.btnSingleStep.Text = "single step";
+            this.btnSingleStep.UseVisualStyleBackColor = true;
             // 
             // CodeEditorForm
             // 
@@ -323,6 +363,7 @@
             this.layout.PerformLayout();
             this.debugTab.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,7 +382,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button btnEvaluate;
         private System.Windows.Forms.TabControl fileTabs;
         private System.Windows.Forms.TabPage tabPage1;
         private ICSharpCode.TextEditor.TextEditorControl codeWindow;
@@ -356,5 +396,9 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem evaluateToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnEvaluate;
+        private System.Windows.Forms.Button btnSingleStep;
+        private System.Windows.Forms.ListView listView1;
     }
 }

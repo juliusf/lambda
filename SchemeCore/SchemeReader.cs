@@ -90,42 +90,84 @@ namespace SchemeCore
 
             var result = new List<Token>();
             string currentToken = "";
-            int lnCnt = 0;
-            int colcnt = 0;
+            int offset = 0;
+            int length = 0;
             
             foreach( char c in input )
             {
-                if( c == '\n' )
-                {
-                    // add to result here, if (currToken != "") ---
-                    if( currentToken != "" )
-                    {
-                        appendToken( ref result, ref currentToken, lnCnt, colcnt );
-                    }
-                    lnCnt++;
-                    colcnt = 0;
-                    continue;
-                }
-                colcnt++;
-
-               switch( c )
+               
+                switch( c )
                { 
                    case '(':
+                       length = 0;
+                       currentToken += c;
+                       appendToken(ref result, ref currentToken, offset, 1);
+                       break;
                    case ')':
-                       appendToken( ref result, ref currentToken, lnCnt, colcnt );
-                       //result.Add(c.ToString());
+                       {
+                           appendToken(ref result, ref currentToken, offset , length-1);
+                           currentToken += c;
+                           appendToken(ref result, ref currentToken, offset, 1);
+                       }
+                       // result.Add(c.ToString());
                        break;
                    case ' ':
-                       appendToken( ref result, ref currentToken, lnCnt, colcnt );
+                   case '\n':
+                       appendToken(ref result, ref currentToken, offset, length - 1);
+                       length = 0;
                        break;
                    default:
                        currentToken += c;
                        break;   
                }
-           }
-            appendToken( ref result, ref currentToken, lnCnt, colcnt );
+                offset++;
+                length++;
+
+            }
+            appendToken(ref result, ref currentToken, offset, length);
 
            return result;
+        }
+
+        public SchemeAST parseStringWithPos(string input, string filename)
+        {
+            SchemeAST root = new SchemeAST();
+            SchemeAST currentParent = root;
+
+            var tokens = tokenizeWithPos(input);
+            SchemeAST newToken; 
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                string token = tokens[i].token;
+                if (token == "(")
+                {
+                    var j = 1 + i;
+                    if (tokens[j].token == ")")   //peek if void
+                    {
+                        newToken = new SchemeAST(currentParent, SchemeVoid.instance);
+                        currentParent.children.Add(newToken);
+                        newToken.sourceOffset = tokens[i].offset;
+                        newToken.sourceLength = tokens[i].length;
+                        i += 2;
+                    }
+
+                    var oldParent = currentParent;
+                    currentParent = new SchemeAST(oldParent, makeSchemeObject(tokens[++i].token)); //make new ast node and assign it to the parent. Also advance the counter!
+                    currentParent.sourceOffset = tokens[i].offset;
+                    currentParent.sourceLength = tokens[i].length;
+                    
+                    oldParent.children.Add(currentParent);
+                }
+                else if (token == ")")
+                {
+                    currentParent = currentParent.parent; //jump up one level
+                }
+                else
+                {
+                    currentParent.children.Add(new SchemeAST(currentParent, makeSchemeObject(token)));
+                }
+            }
+            return root;
         }
 
         void appendToken( ref List<string> result, ref string token )
@@ -138,14 +180,14 @@ namespace SchemeCore
             }
         }
 
-        void appendToken( ref List<Token> result, ref string token, int numlines, int numcols )
+        void appendToken( ref List<Token> result, ref string token, int offset, int length )
         {
             if( token != "" )
             {
                 var res = new Token();
                 res.token = token;
-                res.line = numlines;
-                res.col = numcols;
+                res.offset = offset - length;
+                res.length = length;
 
                 result.Add( res );
                 token = "";
@@ -176,7 +218,8 @@ namespace SchemeCore
     public  struct Token
     {
         public string token;
-        public int line;
-        public int col;
+        public int offset;
+        public int length;
+
     }
 }

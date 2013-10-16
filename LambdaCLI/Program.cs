@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SchemeCore;
+﻿using SchemeCore;
 using SchemeCore.objects;
-using SchemeCore.tests;
-using System.IO;
+using System;
 namespace LambdaCLI
 {
     class Program

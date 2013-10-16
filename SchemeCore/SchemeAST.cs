@@ -21,6 +21,9 @@ namespace SchemeCore
         public bool hasOwnEnviornment { get; set; }
         public List<SchemeAST> children { get { return _children; } set { _children = value; } }
         public SchemeAST parent { get { return _parent; } set { updateParent(value); } }
+        public int sourceOffset { get; set; }
+        public int sourceLength { get; set; }
+        public string fileName { get; set; }
         public SchemeAST()
         {
             _parent = null;
@@ -171,7 +174,7 @@ namespace SchemeCore
              Logger.writeLine("----------------------------");
 
              Logger.writeLine("Timestamp: " + DateTime.Now);
-             Logger.writeLine("Whole AST tree:");
+           /*  Logger.writeLine("Whole AST tree:");
              while (curr.currentObject != SchemeVoid.instance)
              {
                  curr = curr.parent;
@@ -179,7 +182,7 @@ namespace SchemeCore
 
               curr.createTreeOutputHelper("", true, this);
 
-              Logger.writeLine("============================");
+              Logger.writeLine("============================"); */
 
 
          }

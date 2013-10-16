@@ -30,18 +30,10 @@ namespace LambdaGUI
         public CodeEditorForm()
         {
             InitializeComponent();
-            
-           // codeWindow.
 
-
+            // codeWindow.
         }
 
-        private void btnEvaluate_Click( object sender, EventArgs e )
-        {
-            evaluate();
-            //document.BookmarkManager.Factory.CreateBookmark( codeWindow.Document, location );
-           
-        }
 
         private TextEditorControl AddNewTextEditor( string title )
         {
@@ -179,29 +171,38 @@ namespace LambdaGUI
             var reader = new SchemeReader();
             var evaluator = new SchemeEvaluator();
 
-            var ast = reader.parseString( ActiveEditor.Text );
-            var res = evaluator.evaluate( ast );
+            //var ast = reader.parseString( ActiveEditor.Text );
+            var ast = reader.parseStringWithPos( ActiveEditor.Text, ActiveEditor.Name );
+            List<SchemeObject> res;
+            try
+            {
+                 res = evaluator.evaluate(ast);
+            }
+            catch (SchemeException e)
+            { 
+                var document = codeWindow.Document;
+                var marker = new TextMarker(e.offset, e.length, TextMarkerType.SolidBlock);
+                document.MarkerStrategy.AddMarker(marker);
+                var update = new TextAreaUpdate(TextAreaUpdateType.WholeTextArea);
+                document.RequestUpdate(update);
+                document.CommitUpdate();
+
+                int length = resultWindow.Text.Length;
+                resultWindow.AppendText(e.Message);
+                resultWindow.Select(length, (resultWindow.Text.Length - length));
+                resultWindow.SelectionColor = Color.Red;
+
+                return;
+
+            }
+            
 
             // resultWindow.
             foreach( SchemeObject obj in res )
             {
                 resultWindow.AppendText( obj.ToString() + "\n" );
             }
-
-            var document = codeWindow.Document;
-            var location = new ICSharpCode.TextEditor.TextLocation( 1, 1 );
-
-            Bookmark book = new Bookmark( document, location );
-            document.BookmarkManager.AddMark( book );
-
-
-            var margin = codeWindow.Margin;
-
-
-
-            var marker = new TextMarker( 1, 1, TextMarkerType.SolidBlock );
-            document.MarkerStrategy.AddMarker( marker );
-            codeWindow.Update();
+           
         }
 
         private void CodeEditorForm_Load( object sender, EventArgs e )
@@ -223,6 +224,19 @@ namespace LambdaGUI
             resultWindow.SelectionStart = resultWindow.Text.Length;
             resultWindow.ScrollToCaret();
         }
+
+        private void btnEvaluate_Click_1(object sender, EventArgs e)
+
+        {
+            evaluate();
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
 
 
     }
