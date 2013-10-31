@@ -25,6 +25,7 @@ namespace SchemeCore.tests
             //Assert.AreSame( object1, object2 );
         }
 
+
         [Test]
         public void schemeListTest()
         {
@@ -52,6 +53,67 @@ namespace SchemeCore.tests
             Assert.AreEqual( foo, bar );
 
             Assert.AreEqual( foo.ToString(), "()" );
+        }
+
+
+        [Test]
+        public void schemeBuiltInLambdaTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString( "(define add (lambda (num1 num2)(+ num1 num2)))" );
+            eval.evaluate( ast );
+            ast = reader.parseString( "(add 1 2)" );
+
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 3 ) );
+
+            ast = reader.parseString( "(define foo (lambda () (+ 1 2))) " );
+            eval.evaluate( ast );
+            ast = reader.parseString( "(foo)" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 3 ) );
+
+            ast = reader.parseString( "(define bar (lambda (a b) (add a b))" );
+            eval.evaluate( ast );
+
+            ast = reader.parseString( "(bar 1 2)" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 3 ) );
+
+            ast = reader.parseString( "(bar (+ 1 2) 2)" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 5 ) );
+
+            ast = reader.parseString( "(define bar (lambda (a) (if (= a 10) a (+ (bar (+ a 1)) 1 ))))" );
+            eval.evaluate( ast );
+
+            ast = reader.parseString( "(bar 1)" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 19 ) );
+            ast = reader.parseString( "(define foo (lambda (a) (if (= a 10) a (foo (+ a 1)))))" );
+            eval.evaluate( ast );
+
+            ast = reader.parseString( "(foo 1)" );
+            Assert.AreEqual( eval.evaluate( ast )[0], new SchemeInteger( 10 ) );
+
+        }
+
+        [Test]
+        public void schemeHigherOrderFunctionTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString( "(define scons (lambda (x y) (lambda (m) (m x y))))" );
+            eval.evaluate( ast );
+            ast = reader.parseString( "(define scar (lambda (z) (z (lambda (p q) p))))" );
+            eval.evaluate( ast );
+            ast = reader.parseString( "(scar (scons 10 11))" );
+
+            Assert.AreEqual( new SchemeInteger( 10 ), eval.evaluate( ast )[0] );
+
+            //Double evaluation Bug
+            ast = reader.parseString( "(scar (scons 10 11))" );
+
+            Assert.AreEqual( new SchemeInteger( 10 ), eval.evaluate( ast )[0] );
+
         }
     }
 }

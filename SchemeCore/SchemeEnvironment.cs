@@ -12,49 +12,49 @@ namespace SchemeCore
 {
     internal interface ISchemeEnvironment
     {
-        void set( SchemeSymbol symbol, SchemeType type );
-        SchemeType get( SchemeSymbol symbol );
-        bool has( SchemeSymbol symbol );
+        void set(SchemeSymbol symbol, SchemeType type);
+        SchemeType get(SchemeSymbol symbol);
+        bool has(SchemeSymbol symbol);
         Dictionary<string, SchemeType> getDict();
-         ISchemeEnvironment parent();
+        ISchemeEnvironment parent();
         void setParent(ISchemeEnvironment parent);
     }
 
-    internal class SchemeEnvironment :ISchemeEnvironment
+    internal class SchemeEnvironment : ISchemeEnvironment
     {
         private ISchemeEnvironment _parent;
-        public Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
+        public Dictionary<string, SchemeType> _symbolTable = new Dictionary<string, SchemeType>();
 
         public Dictionary<string, SchemeType> getDict()
         {
             return _symbolTable;
         }
-        public SchemeEnvironment( ISchemeEnvironment parent )
+        public SchemeEnvironment(ISchemeEnvironment parent)
         {
-            Debug.Assert( parent != null, "Parent must not be null! use SchemeEnvironmentroot.Singleton!" );
+            Debug.Assert(parent != null, "Parent must not be null! use SchemeEnvironmentroot.Singleton!");
             _parent = parent;
         }
 
-        public void set( SchemeSymbol symbol, SchemeType type )
+        public void set(SchemeSymbol symbol, SchemeType type)
         {
             _symbolTable[symbol.value] = type;
         }
 
-        public SchemeType get( SchemeSymbol symbol )
+        public SchemeType get(SchemeSymbol symbol)
         {
-            if( _symbolTable.ContainsKey( symbol.value ) )
+            if (_symbolTable.ContainsKey(symbol.value))
             {
                 return _symbolTable[symbol.value];
             }
             else
             {
-                return _parent.get( symbol );
+                return _parent.get(symbol);
             }
         }
 
-        public bool has( SchemeSymbol symbol )
+        public bool has(SchemeSymbol symbol)
         {
-            return _symbolTable.ContainsKey( symbol.value );
+            return _symbolTable.ContainsKey(symbol.value);
         }
 
         public ISchemeEnvironment parent()
@@ -69,15 +69,15 @@ namespace SchemeCore
         }
     }
 
-    class SchemeEnvironmentRoot :ISchemeEnvironment
+    class SchemeEnvironmentRoot : ISchemeEnvironment
     {
         private static SchemeEnvironmentRoot _instance = new SchemeEnvironmentRoot();
-        public Dictionary<string, SchemeType> _symbolTable = new Dictionary<string,SchemeType>();
-       
+        public Dictionary<string, SchemeType> _symbolTable = new Dictionary<string, SchemeType>();
+
         private SchemeEnvironmentRoot() { }
 
         public static SchemeEnvironmentRoot instance
-         {
+        {
             get
             {
                 if (_instance == null)
@@ -88,14 +88,14 @@ namespace SchemeCore
             }
         }
 
-        public void set( SchemeSymbol symbol, SchemeType type )
+        public void set(SchemeSymbol symbol, SchemeType type)
         {
             _symbolTable[symbol.value] = type;
         }
 
-        public SchemeType get( SchemeSymbol symbol )
+        public SchemeType get(SchemeSymbol symbol)
         {
-            if( _symbolTable.ContainsKey( symbol.value ) )
+            if (_symbolTable.ContainsKey(symbol.value))
             {
                 return _symbolTable[symbol.value];
             }
@@ -103,10 +103,10 @@ namespace SchemeCore
             {
                 //check if it is an integer or float
                 int intValue;
-                if( int.TryParse( symbol.value, out intValue ) )
+                if (int.TryParse(symbol.value, out intValue))
                 {
 
-                   return new SchemeInteger( intValue );
+                    return new SchemeInteger(intValue);
                 }
                 else
                 {
@@ -118,10 +118,10 @@ namespace SchemeCore
         {
             return null;
         }
-       
-        public bool has( SchemeSymbol symbol )
+
+        public bool has(SchemeSymbol symbol)
         {
-            return _symbolTable.ContainsKey( symbol.value );
+            return _symbolTable.ContainsKey(symbol.value);
         }
 
 
