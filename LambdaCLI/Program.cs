@@ -13,7 +13,9 @@ namespace LambdaCLI
             var bar = new SchemeCore.tests.BaseFunctionTests();
             bar.SchemeReaderTest();
             bar.SchemeASTTest();
-            var foo = new SchemeCore.tests.SchemeBuiltinFunctionTest();
+            
+            var foo = new SchemeCore.tests.SchemeObjectTests();
+            foo.schemeSetTest();
             //foo.schemeBuiltInLambdaTest();
             //foo.schemeBuiltinIfTest();
             //foo.schemeBuiltinModuloTest();
