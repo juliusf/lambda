@@ -7,6 +7,7 @@ using System.Text;
 using NUnit.Framework;
 using SchemeCore.objects;
 using SchemeCore;
+using SchemeCore.builtin;
 
 namespace SchemeCore.tests
 {
@@ -49,14 +50,38 @@ namespace SchemeCore.tests
             ast = reader.parseString( "x" );
             Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 1 ) );
 
-            ast = reader.parseString( "(define bar (lambda () (define x 23) x))" );
+            ast = reader.parseString( "(define bar (lambda () (define x 23) (x)))" );
             evaluator.evaluate( ast );
 
             ast = reader.parseString( "(bar)" );
-            Assert.AreEqual( evaluator.evaluate( ast )[1], new SchemeInteger( 23 ) );
+            Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 23 ) );
 
             ast = reader.parseString( "x" );
             Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 1 ) );
+
+        }
+
+        [Test]
+        public void complexEnviornmentTest()
+        {
+            var root = SchemeEnvironmentRoot.instance;
+            var reader = new SchemeReader();
+            var evaluator = new SchemeEvaluator();
+
+            var ast = reader.parseString( "(define foo (lambda (param) (bar param param))" );
+            evaluator.evaluate( ast );
+            Assert.AreEqual( root, evaluator.environment );
+            //Assert.AreEqual( 1, evaluator.environment.getDict().Count );
+            Assert.AreEqual( evaluator.environment.getDict().ContainsKey( "foo" ), true );
+            Assert.AreEqual( evaluator.environment.getDict()["foo"] is  SchemeLambda, true  );
+
+             ast = reader.parseString( "(define bar +) (foo 1)" );
+             evaluator.evaluate( ast );
+
+             Assert.AreEqual( root, evaluator.environment );
+             Assert.AreEqual( evaluator.environment.getDict()["bar"].GetType(), typeof( SchemeBuiltInPlus ) );
+             Assert.AreEqual( true, ( (SchemeLambda) evaluator.environment.getDict()["foo"] )._lambdaEnv.has( new SchemeSymbol( "bar" ) ) );
+             
 
         }
 

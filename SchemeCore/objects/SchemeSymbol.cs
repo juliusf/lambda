@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SchemeCore.objects
 {
-    class SchemeSymbol : SchemeObject
+    public class SchemeSymbol : SchemeObject
     {
         public string value { get; set; }
 

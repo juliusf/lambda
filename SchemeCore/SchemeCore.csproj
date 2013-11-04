@@ -60,6 +60,8 @@
     <Compile Include="objects\SchemeBool.cs" />
     <Compile Include="objects\SchemeFunction.cs" />
     <Compile Include="objects\SchemeLambda.cs" />
+    <Compile Include="objects\SchemeLambdaImpl.cs" />
+    <Compile Include="objects\SchemeLambdaTemplate.cs" />
     <Compile Include="SchemeAST.cs" />
     <Compile Include="SchemeEnvironment.cs" />
     <Compile Include="helper\SchemeExceptions.cs" />

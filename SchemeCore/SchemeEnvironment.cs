@@ -10,7 +10,7 @@ using SchemeCore.helper;
 
 namespace SchemeCore
 {
-    internal interface ISchemeEnvironment
+    public interface ISchemeEnvironment
     {
         void set(SchemeSymbol symbol, SchemeType type);
         SchemeType get(SchemeSymbol symbol);
@@ -54,7 +54,25 @@ namespace SchemeCore
 
         public bool has(SchemeSymbol symbol)
         {
-            return _symbolTable.ContainsKey(symbol.value);
+            if( _symbolTable.ContainsKey( symbol.value ) )
+            {
+                return true;
+            }
+            else
+            {
+                if (parent() == null)
+                {
+                    return false;
+                }else
+                {
+                  return _parent.has( symbol );
+                }
+            }
+        }
+
+        public bool hasLocal( SchemeSymbol symbol )
+        {
+            return _symbolTable.ContainsKey( symbol.value );
         }
 
         public ISchemeEnvironment parent()

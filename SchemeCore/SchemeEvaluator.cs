@@ -12,6 +12,7 @@ namespace SchemeCore
 {
     public class SchemeEvaluator
     {
+        public ISchemeEnvironment environment { get{return  currentEnvironment;} }
         private SchemeEnvironmentRoot root;
         public SchemeEvaluator()
         {
@@ -80,6 +81,8 @@ namespace SchemeCore
                         {
                             continue;
                         }
+
+                       
 
 
                         updateParent(ref ast, evaluated);                //replace currentAST with result
@@ -156,13 +159,13 @@ namespace SchemeCore
                } */
             if (currentAST.hasOwnEnviornment)// && currentEnvironment.parent() != null )
             {
-                if (newValue is SchemeLambda)
-                {
-                    foreach (string key in currentEnvironment.getDict().Keys)
-                    {
-                        currentEnvironment.parent().set(new SchemeSymbol(key), currentEnvironment.getDict()[key]);
-                    }
-                }
+                /* if (newValue is SchemeLambda)
+                 {
+                     foreach (string key in currentEnvironment.getDict().Keys)
+                     {
+                         currentEnvironment.parent().set(new SchemeSymbol(key), currentEnvironment.getDict()[key]);
+                     }        
+                 }           */
                 currentEnvironment = currentEnvironment.parent();
             }
 
@@ -184,6 +187,7 @@ namespace SchemeCore
             var func = getFunction(ref ast, environment);
             if (func != null)
             {
+             
                 return func.evaluate(ref ast, this);
             }
             else
