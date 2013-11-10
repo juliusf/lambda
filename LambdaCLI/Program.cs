@@ -14,7 +14,7 @@ namespace LambdaCLI
             bar.SchemeReaderTest();
             bar.SchemeASTTest();
             bar.complexEnviornmentTest();
-            bar.schemeEnvironentTest();
+           // bar.();
             
             var foo = new SchemeCore.tests.SchemeObjectTests();
             //foo.schemeSetTest();

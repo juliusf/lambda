@@ -11,7 +11,7 @@ namespace SchemeCore.objects
         private SchemeAST _implementation;
         public override ISchemeEnvironment _lambdaEnv { get; set; }
 
-        public SchemeLambdaImpl( SchemeAST implementation, List<SchemeSymbol> _params, SchemeEnvironment env )
+        public SchemeLambdaImpl(SchemeAST implementation, List<SchemeSymbol> _params, ISchemeEnvironment env)
         {
             this._implementation = implementation;
             this._params = _params;
