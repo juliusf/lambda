@@ -54,7 +54,7 @@ namespace SchemeCore.tests
             evaluator.evaluate( ast );
 
             ast = reader.parseString( "(bar)" );
-            Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 23 ) );
+            Assert.AreEqual( evaluator.evaluate( ast )[1], new SchemeInteger( 23 ) );
 
             ast = reader.parseString( "x" );
             Assert.AreEqual( evaluator.evaluate( ast )[0], new SchemeInteger( 1 ) );

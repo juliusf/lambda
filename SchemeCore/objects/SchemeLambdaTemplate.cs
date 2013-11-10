@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Text;
 using SchemeCore.helper;
@@ -31,7 +31,7 @@ namespace SchemeCore.objects
             }
             _implementation = new SchemeAST();
 
-            _lambdaEnv = new SchemeEnvironment( currentEnv );
+            _lambdaEnv = currentEnv ;
 
             for (int i = 1; i < ast.children.Count; i++)
             {
@@ -49,24 +49,20 @@ namespace SchemeCore.objects
                 throw new SchemeWrongNumberOfArguments( String.Format( "Lambda expects exactly two arguments. You have given me: {0}", currentAST.children.Count ) );
             }
 
-            /*       if (evaluator.currentEnvironment != _lambdaEnv)
-                   {
+                 
 
-                       _lambdaEnv.setParent(evaluator.currentEnvironment);
-                       evaluator.currentEnvironment = _lambdaEnv;
 
-                   }
-                   else
-                   {
-                       int i = 0;
-                   } */
-            // 
-            SchemeLambda lambda = new SchemeLambdaImpl( _implementation, _params, new SchemeEnvironment( evaluator.currentEnvironment ) );
+                    var tmp = _lambdaEnv.getClonedEnv(evaluator.currentEnvironment); 
+                    //_lambdaEnv.setParent(evaluator.currentEnvironment);
+                       //evaluator.currentEnvironment = _lambdaEnv;
+
+
+                    SchemeLambda lambda = new SchemeLambdaImpl(_implementation, _params, new SchemeEnvironment(tmp) );
 
 
 
-
-            return lambda;
+            lambda.evaluate(ref currentAST, evaluator);
+            return null;
 
         }
 

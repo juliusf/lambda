@@ -19,7 +19,7 @@ namespace SchemeCore.objects
 
         }
 
-        public SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
+        public override SchemeObject evaluate( ref SchemeAST currentAST, SchemeEvaluator evaluator )
         {
             evaluator.currentEnvironment = _lambdaEnv;
 

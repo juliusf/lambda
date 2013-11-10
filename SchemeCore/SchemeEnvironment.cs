@@ -18,6 +18,7 @@ namespace SchemeCore
         Dictionary<string, SchemeType> getDict();
         ISchemeEnvironment parent();
         void setParent(ISchemeEnvironment parent);
+        ISchemeEnvironment getClonedEnv(ISchemeEnvironment parent);
     }
 
     internal class SchemeEnvironment : ISchemeEnvironment
@@ -29,6 +30,13 @@ namespace SchemeCore
         {
             return _symbolTable;
         }
+
+        public SchemeEnvironment(Dictionary<string, SchemeType> dict, ISchemeEnvironment parent)
+        {
+            _parent = parent;
+            _symbolTable = dict;
+        }
+
         public SchemeEnvironment(ISchemeEnvironment parent)
         {
             Debug.Assert(parent != null, "Parent must not be null! use SchemeEnvironmentroot.Singleton!");
@@ -54,7 +62,7 @@ namespace SchemeCore
 
         public bool has(SchemeSymbol symbol)
         {
-            if( _symbolTable.ContainsKey( symbol.value ) )
+            if (_symbolTable.ContainsKey(symbol.value))
             {
                 return true;
             }
@@ -63,16 +71,17 @@ namespace SchemeCore
                 if (parent() == null)
                 {
                     return false;
-                }else
+                }
+                else
                 {
-                  return _parent.has( symbol );
+                    return _parent.has(symbol);
                 }
             }
         }
 
-        public bool hasLocal( SchemeSymbol symbol )
+        public bool hasLocal(SchemeSymbol symbol)
         {
-            return _symbolTable.ContainsKey( symbol.value );
+            return _symbolTable.ContainsKey(symbol.value);
         }
 
         public ISchemeEnvironment parent()
@@ -85,6 +94,18 @@ namespace SchemeCore
         {
             this._parent = parent;
         }
+
+
+
+        public ISchemeEnvironment getClonedEnv(ISchemeEnvironment parent)
+        {
+
+
+            var tmp = new SchemeEnvironment(_symbolTable, parent);
+            return (ISchemeEnvironment)tmp;
+        }
+
+
     }
 
     class SchemeEnvironmentRoot : ISchemeEnvironment
@@ -152,6 +173,12 @@ namespace SchemeCore
         public void setParent(ISchemeEnvironment parent)
         {
             throw new NotImplementedException();
+        }
+        public ISchemeEnvironment getClonedEnv(ISchemeEnvironment parent)
+        {
+
+
+            return new SchemeEnvironment(_symbolTable, parent);
         }
     }
 }
