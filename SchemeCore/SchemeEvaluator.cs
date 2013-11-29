@@ -28,6 +28,7 @@ namespace SchemeCore
             root.set(new SchemeSymbol("cons"), new SchemeBuiltinCons());
             root.set(new SchemeSymbol("cdr"), new SchemeBuiltinCdr());
             root.set(new SchemeSymbol("car"), new SchemeBuiltinCar());
+            root.set(new SchemeSymbol(">"), new SchemeBuiltinGreater());
 
         }
 

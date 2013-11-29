@@ -51,6 +51,7 @@
     <Compile Include="builtin\SchemeBuiltinCdr.cs" />
     <Compile Include="builtin\SchemeBuiltinCons.cs" />
     <Compile Include="builtin\SchemeBuiltinEquals.cs" />
+    <Compile Include="builtin\SchemeBuiltinGreater.cs" />
     <Compile Include="builtin\SchemeBuiltInIf.cs" />
     <Compile Include="builtin\schemeBuiltinModulo.cs" />
     <Compile Include="builtin\SchemeBuiltInLambda.cs" />

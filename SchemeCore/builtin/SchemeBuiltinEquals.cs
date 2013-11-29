@@ -39,7 +39,7 @@ namespace SchemeCore.builtin
             }
             catch( InvalidCastException )
             {
-                throw new SchemeInvalidArgumentException( "Builtin Function + expects SchemeInteger or SchemeFloat as parameter. Got something else." );
+                throw new SchemeInvalidArgumentException( "Builtin Function Equals expects SchemeInteger or SchemeFloat as parameter. Got something else." );
             }
 
             return SchemeTrue.instance;
