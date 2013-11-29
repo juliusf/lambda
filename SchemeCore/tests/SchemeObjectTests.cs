@@ -124,12 +124,12 @@ namespace SchemeCore.tests
 
             var defineSingletonSet = reader.parseString( "(define singletonSet (lambda (x) (lambda (y) (= y x))))" );
             var defineContains = reader.parseString( "(define contains (lambda (set_ y) (set_ y)))" );
-            var defineTestSets = reader.parseString( "(define s1 (singletonSet 1)) (define s2 (singletonSet 2))" );
-            /*        "(define s1 (singletonSet 1)) " +
-                    "(define s2 (singletonSet 2)) ";  +
+            var defineTestSets = reader.parseString( "(define s1 (singletonSet 1)) (define s2 (singletonSet 2))" +
+                   "(define s1 (singletonSet 1)) " +
+                    "(define s2 (singletonSet 2)) "  +
                     "(define s3 (lambda (x) (and (>= x 5) (<= x 15))))" +
                     "(define s4 (lambda (x) (and (<= x -5) (>= x -15))))" +
-                  ")");  */
+                  ")");  
 
             var test1 = reader.parseString("(contains s1 1)");
             var test2 = reader.parseString("(contains s2 2)");
@@ -143,9 +143,9 @@ namespace SchemeCore.tests
 
             Assert.AreEqual( SchemeTrue.instance, eval.evaluate( test1 )[0] );
             Assert.AreEqual( SchemeTrue.instance, eval.evaluate( test2 )[0] );
-            //Assert.AreEqual( SchemeTrue.instance, eval.evaluate( test3 )[0] );
-            //Assert.AreEqual( SchemeTrue.instance, eval.evaluate( test4 ) );
-            //Assert.AreEqual( SchemeFalse.instance, eval.evaluate( test5 ) );
+            Assert.AreEqual( SchemeTrue.instance, eval.evaluate( test3 )[0] );
+            Assert.AreEqual( SchemeTrue.instance, eval.evaluate( test4 )[0] );
+            Assert.AreEqual( SchemeFalse.instance, eval.evaluate( test5 )[0] );
 
 
         }
