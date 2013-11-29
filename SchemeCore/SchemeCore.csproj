@@ -56,6 +56,7 @@
     <Compile Include="builtin\schemeBuiltinModulo.cs" />
     <Compile Include="builtin\SchemeBuiltInLambda.cs" />
     <Compile Include="builtin\SchemeBuiltInPlus.cs" />
+    <Compile Include="builtin\SchemeBuiltinSmaller.cs" />
     <Compile Include="builtin\SchemeBuitInDefine.cs" />
     <Compile Include="helper\Logger.cs" />
     <Compile Include="objects\SchemeBool.cs" />
