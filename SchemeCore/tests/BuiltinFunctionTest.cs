@@ -77,6 +77,23 @@ namespace SchemeCore.tests
             Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
 
         }
+
+        [Test]
+        public void schemeBuiltInAndTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString("(and #t #f)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
+
+            ast = reader.parseString("(and #t #t)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(and #t #t #t #t #f )");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
+
+        }
         [Test]
         public void schemeBuiltinIfTest()
         {

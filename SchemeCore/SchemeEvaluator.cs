@@ -30,6 +30,7 @@ namespace SchemeCore
             root.set(new SchemeSymbol("car"), new SchemeBuiltinCar());
             root.set(new SchemeSymbol(">"), new SchemeBuiltinGreater());
             root.set(new SchemeSymbol("<"), new SchemeBuiltinSmaller());
+            root.set(new SchemeSymbol("and"), new SchemeBuiltinAnd());
         }
 
         public void loadSchemeLibrary(string path)
