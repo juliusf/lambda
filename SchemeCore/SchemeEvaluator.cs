@@ -28,8 +28,10 @@ namespace SchemeCore
             root.set(new SchemeSymbol("cons"), new SchemeBuiltinCons());
             root.set(new SchemeSymbol("cdr"), new SchemeBuiltinCdr());
             root.set(new SchemeSymbol("car"), new SchemeBuiltinCar());
-            root.set(new SchemeSymbol(">"), new SchemeBuiltinGreater());
-            root.set(new SchemeSymbol("<"), new SchemeBuiltinSmaller());
+            root.set(new SchemeSymbol(">"), new SchemeBuiltinGreaterThan());
+            root.set(new SchemeSymbol(">="), new SchemeBuiltinGreaterThanEqual());
+            root.set(new SchemeSymbol("<"), new SchemeBuiltinLessThan());
+            root.set(new SchemeSymbol("<="), new SchemeBuiltinLessThanEquals());
             root.set(new SchemeSymbol("and"), new SchemeBuiltinAnd());
             root.set(new SchemeSymbol("or"), new SchemeBuiltinOr());
         }

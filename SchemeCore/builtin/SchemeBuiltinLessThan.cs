@@ -9,12 +9,12 @@ using SchemeCore.helper;
 
 namespace SchemeCore.builtin
 {
-    class SchemeBuiltinSmaller : SchemeBuiltInFunction
+    class SchemeBuiltinLessThan : SchemeBuiltInFunction
     {
         public override SchemeObject evaluate(ref SchemeAST currentAST, SchemeEvaluator evaluator)
         {
             var list = lookupSymbolsFromEnv(ref currentAST, evaluator.currentEnvironment);
-            Debug.Assert(list[0].GetType() == typeof(SchemeBuiltinSmaller));
+            Debug.Assert(list[0].GetType() == typeof(SchemeBuiltinLessThan));
 
             if (list.Count < 3)
             {

@@ -42,7 +42,7 @@ namespace SchemeCore.tests
 
         }
         [Test]
-        public void schemeBuiltInGreaterTest()
+        public void schemeBuiltInGreaterThanTest()
         {
             SchemeReader reader = new SchemeReader();
             SchemeEvaluator eval = new SchemeEvaluator();
@@ -60,9 +60,28 @@ namespace SchemeCore.tests
             Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
 
         }
+        [Test]
+        public void schemeBuiltInGreaterThanEqualTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString("(>= 1 1)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(>= 2 1)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(>= 5 4 3 2 1)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(>= 10 6 8 2 1)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
+
+        }
 
         [Test]
-        public void schemeBuiltInSmallerTest()
+        public void schemeBuiltInLessThanTest()
         {
             SchemeReader reader = new SchemeReader();
             SchemeEvaluator eval = new SchemeEvaluator();
@@ -74,6 +93,26 @@ namespace SchemeCore.tests
             Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
 
             ast = reader.parseString("(< 1 2 3 4 5)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+        }
+
+        [Test]
+        public void schemeBuiltInLessThanEqualsTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString("(<= 1 1)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(<= 1 2)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(<= 2 1)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
+
+            ast = reader.parseString("(<= 1 2 3 4 5)");
             Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
 
         }

@@ -52,13 +52,15 @@
     <Compile Include="builtin\SchemeBuiltinCdr.cs" />
     <Compile Include="builtin\SchemeBuiltinCons.cs" />
     <Compile Include="builtin\SchemeBuiltinEquals.cs" />
-    <Compile Include="builtin\SchemeBuiltinGreater.cs" />
+    <Compile Include="builtin\SchemeBuiltinGreaterThan.cs" />
+    <Compile Include="builtin\SchemeBuiltinGreaterThanEqual.cs" />
     <Compile Include="builtin\SchemeBuiltInIf.cs" />
+    <Compile Include="builtin\SchemeBuiltInLessThanEquals.cs" />
     <Compile Include="builtin\schemeBuiltinModulo.cs" />
     <Compile Include="builtin\SchemeBuiltInLambda.cs" />
     <Compile Include="builtin\SchemeBuiltinOr.cs" />
     <Compile Include="builtin\SchemeBuiltInPlus.cs" />
-    <Compile Include="builtin\SchemeBuiltinSmaller.cs" />
+    <Compile Include="builtin\SchemeBuiltinLessThan.cs" />
     <Compile Include="builtin\SchemeBuitInDefine.cs" />
     <Compile Include="helper\Logger.cs" />
     <Compile Include="objects\SchemeBool.cs" />
