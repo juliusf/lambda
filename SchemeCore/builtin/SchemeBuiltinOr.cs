@@ -9,12 +9,12 @@ using SchemeCore.helper;
 
 namespace SchemeCore.builtin
 {
-    class SchemeBuiltinAnd : SchemeBuiltInFunction
+    class SchemeBuiltinOr : SchemeBuiltInFunction
     {
         public override SchemeObject evaluate(ref SchemeAST currentAST, SchemeEvaluator evaluator)
         {
             var list = lookupSymbolsFromEnv(ref currentAST, evaluator.currentEnvironment);
-            Debug.Assert(list[0].GetType() == typeof(SchemeBuiltinAnd));
+            Debug.Assert(list[0].GetType() == typeof(SchemeBuiltinOr));
 
             if (list.Count < 3)
             {
@@ -25,23 +25,23 @@ namespace SchemeCore.builtin
             {
                 foreach (SchemeBool value in list.GetRange(1, list.Count - 1))
                 {
-                    if ( value != SchemeTrue.instance )
+                    if (value == SchemeTrue.instance)
                     {
-                        return SchemeFalse.instance;
+                        return SchemeTrue.instance;
                     }
                 }
             }
             catch (InvalidCastException)
             {
-                throw new SchemeInvalidArgumentException("Builtin Function AND expects SchemeInteger or SchemeFloat as parameter. Got something else.");
+                throw new SchemeInvalidArgumentException("Builtin Function OR expects SchemeInteger or SchemeFloat as parameter. Got something else.");
             }
 
-            return SchemeTrue.instance;
+            return SchemeFalse.instance;
         }
 
         public override string ToString()
         {
-            return "SchemeBuilitin and";
+            return "SchemeBuilitin or";
         }
     }
 }

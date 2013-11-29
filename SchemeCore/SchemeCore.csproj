@@ -56,6 +56,7 @@
     <Compile Include="builtin\SchemeBuiltInIf.cs" />
     <Compile Include="builtin\schemeBuiltinModulo.cs" />
     <Compile Include="builtin\SchemeBuiltInLambda.cs" />
+    <Compile Include="builtin\SchemeBuiltinOr.cs" />
     <Compile Include="builtin\SchemeBuiltInPlus.cs" />
     <Compile Include="builtin\SchemeBuiltinSmaller.cs" />
     <Compile Include="builtin\SchemeBuitInDefine.cs" />

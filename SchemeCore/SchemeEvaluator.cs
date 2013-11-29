@@ -31,6 +31,7 @@ namespace SchemeCore
             root.set(new SchemeSymbol(">"), new SchemeBuiltinGreater());
             root.set(new SchemeSymbol("<"), new SchemeBuiltinSmaller());
             root.set(new SchemeSymbol("and"), new SchemeBuiltinAnd());
+            root.set(new SchemeSymbol("or"), new SchemeBuiltinOr());
         }
 
         public void loadSchemeLibrary(string path)

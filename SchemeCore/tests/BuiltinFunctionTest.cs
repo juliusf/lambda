@@ -95,6 +95,22 @@ namespace SchemeCore.tests
 
         }
         [Test]
+        public void schemeBuiltInOrTest()
+        {
+            SchemeReader reader = new SchemeReader();
+            SchemeEvaluator eval = new SchemeEvaluator();
+
+            var ast = reader.parseString("(or #f #t)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+            ast = reader.parseString("(or #f #f)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeFalse.instance);
+
+            ast = reader.parseString("(or #f #f #f #f #t)");
+            Assert.AreEqual(eval.evaluate(ast)[0], SchemeTrue.instance);
+
+        }
+        [Test]
         public void schemeBuiltinIfTest()
         {
             SchemeReader reader = new SchemeReader();
